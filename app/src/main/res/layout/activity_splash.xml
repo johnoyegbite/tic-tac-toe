@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".MainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/logo"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                tools:alpha="1">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/square_dimen"
+                    android:layout_height="@dimen/square_dimen"
+                    android:src="@drawable/x"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/square_dimen"
+                    android:layout_height="@dimen/square_dimen"
+                    android:src="@drawable/o2"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/game_name"
+                android:layout_marginTop="@dimen/margin_biggest"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                tools:alpha="1">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tic_tac_toe"
+                    android:textSize="@dimen/text_size_biggest"
+                    android:gravity="center"
+                    />
+
+<!--                <com.google.android.material.textview.MaterialTextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/tac"-->
+<!--                    android:textSize="@dimen/text_size_biggest"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_marginLeft="@dimen/margin_mid"-->
+<!--                    android:layout_marginRight="@dimen/margin_mid"-->
+<!--                    />-->
+
+<!--                <com.google.android.material.textview.MaterialTextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/toe"-->
+<!--                    android:textSize="@dimen/text_size_biggest"-->
+<!--                    android:gravity="center"-->
+<!--                    />-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

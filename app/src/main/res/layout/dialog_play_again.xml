@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="playerName"
+            type="String" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_marginTop="@dimen/card_margin_top"
+        android:layout_marginBottom="@dimen/card_margin_top"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_white"
+        android:layout_gravity="center"
+        app:cardCornerRadius="@dimen/padding_smaller"
+        app:cardElevation="@dimen/padding_mid">
+
+        <LinearLayout
+            android:background="@color/white"
+            android:paddingTop="@dimen/padding_big"
+            android:paddingBottom="@dimen/padding_big"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingRight="@dimen/padding_small"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/x_wins, playerName)}"
+                android:textColor="@color/text_2"
+                android:textSize="@dimen/text_size_big"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin_mid"
+                android:layout_marginRight="@dimen/margin_mid"
+                tools:text="Oyegbite win"
+                />
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_mid"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_smaller"
+                    android:layout_marginRight="@dimen/margin_smaller"
+                    android:paddingLeft="@dimen/padding_larger"
+                    android:paddingRight="@dimen/padding_larger"
+                    android:text="@string/reset"
+                    android:textSize="@dimen/text_size_small"
+                    app:cornerRadius="@dimen/border_radius_button"
+                    app:backgroundTint="@color/neon_pink"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/play_again"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_smaller"
+                    android:layout_marginRight="@dimen/margin_smaller"
+                    android:paddingLeft="@dimen/padding_larger"
+                    android:paddingRight="@dimen/padding_larger"
+                    android:text="@string/play_again"
+                    android:textSize="@dimen/text_size_small"
+                    app:cornerRadius="@dimen/border_radius_button"
+                    app:backgroundTint="@color/color_primary"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

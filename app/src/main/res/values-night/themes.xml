@@ -1,0 +1,126 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TicTacToe" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary_dark</item>
+        <item name="colorOnPrimary">@color/bg_white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+
+        <!-- To use Toolbar as an Action Bar, first disable the decor-provided Action Bar. -->
+        <!-- Developing for Android Lollipop -->
+        <item name="windowActionBar">false</item>
+        <!-- if you're using AppCompatActivity support library of version 22.1 or greater -->
+        <item name="windowNoTitle">true</item>
+
+        <item name="textInputStyle">@style/AppTextField</item>
+        <item name="materialAlertDialogTheme">@style/MaterialAlertDialog</item>
+    </style>
+
+
+    <style name="Toolbar.TitleText" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/TitleTextStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/BodyTextStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="TitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_mid</item>
+    </style>
+
+    <style name="BodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:paddingTop">@dimen/padding_smaller</item>
+        <item name="android:paddingBottom">@dimen/padding_mid</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/color_primary_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/color_primary_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:background">@color/color_primary_dark</item>
+    </style>
+
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/color_primary_dark</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="android:textColorHint">@color/color_primary_dark</item>
+    </style>
+
+    <style name="TextInputLayoutStyle">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginBottom">@dimen/margin_smallest</item>
+        <!--        <item name="android:layout_marginRight">@dimen/margin_large</item>-->
+        <!--        <item name="android:layout_marginLeft">@dimen/margin_large</item>-->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextInputEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_2</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="invert" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/bg_white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="SeekBar" parent="Theme.TicTacToe">
+        <item name="colorControlActivated">@color/color_primary_dark</item>
+        <item name="colorControlNormal">@color/color_primary_dark</item>
+    </style>
+
+    <style name="ButtonStyleTransparent" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">@dimen/text_size_smaller</item>
+        <item name="android:layout_marginTop">@dimen/margin_smaller</item>
+        <item name="android:layout_marginBottom">@dimen/margin_smaller</item>
+        <item name="android:layout_marginLeft">@dimen/margin_smaller</item>
+        <item name="android:layout_marginRight">@dimen/margin_smaller</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+        <item name="android:paddingLeft">@dimen/padding_small</item>
+        <item name="android:paddingRight">@dimen/padding_small</item>
+        <item name="rippleColor">@color/color_primary_light</item>
+    </style>
+
+    <style name="ButtonStyleFilled" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_size_smaller</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="rippleColor">@color/color_primary_light</item>
+    </style>
+
+    <style name="RoundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+</resources>

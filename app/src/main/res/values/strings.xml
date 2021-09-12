@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+
+    <string name="tic">Tic</string>
+    <string name="tac">Tac</string>
+    <string name="toe">Toe</string>
+
+    <string name="tic_tac_toe">Tic Tac Toe</string>
+
+    <string name="confirm_exit">Do you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="choose_play_mode">Choose your play mode</string>
+    <string name="with_ai">With AI</string>
+    <string name="with_a_friend">With A Friend</string>
+
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_names">Enter names</string>
+    <string name="hint_player_1">Player 1</string>
+    <string name="hint_player_2">Player 2</string>
+    <string name="hint_ai">AI</string>
+    <string name="continue_text">Continue</string>
+
+    <string name="x_wins">%s won</string>
+    <string name="reset">Reset</string>
+    <string name="play_again">Play Again</string>
+    <string name="exit">Exit</string>
+
+    <string name="pick_your_side">Pick your side</string>
+    <string name="player1_pick">%s, pick your side</string>
+    <string name="turn">turn</string>
+    
+    <string name="touch_to_exit">Touch again to exit</string>
+    <string name="choose_another_name">Name "AI" is reserved for computer</string>
+
+    <string name="first_player">@string/hint_player_1</string> <!-- Denotes first player -->
+    <string name="second_player">@string/hint_player_2</string> <!-- Denotes second player -->
+    <string name="draw">Draw</string>
+    <string name="pending">Pending</string>
+
+    <string name="win_direction_row">Row</string>
+    <string name="win_direction_col">Column</string>
+    <string name="win_direction_lead_diagonal">Leading diagonal</string>
+    <string name="win_direction_opp_lead_diagonal">Opposite leading diagonal</string>
+    <string name="win_direction_none">None</string>
+
+</resources>

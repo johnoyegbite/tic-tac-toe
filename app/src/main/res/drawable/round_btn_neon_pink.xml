@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/neon_pink" />
+    <corners android:bottomRightRadius="@dimen/border_radius_button"
+        android:bottomLeftRadius="@dimen/border_radius_button"
+        android:topRightRadius="@dimen/border_radius_button"
+        android:topLeftRadius="@dimen/border_radius_button"/>
+</shape>

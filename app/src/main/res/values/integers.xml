@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="anim_300_mills">300</integer>
+    <integer name="anim_half_secs">500</integer>
+    <integer name="anim_one_secs">1000</integer>
+    <integer name="anim_mills">500</integer>
+
+</resources>

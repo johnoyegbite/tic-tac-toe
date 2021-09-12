@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="isTwoPlayer"
+            type="Boolean" />
+
+    </data>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_white"
+        tools:context=".activities.EnterPlayerName">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/square_dimen"
+            android:layout_height="@dimen/square_dimen"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_largest_negative"
+            android:layout_marginTop="@dimen/margin_largest_negative"
+            android:src="@drawable/x"
+            />
+
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{isTwoPlayer ? @string/enter_names : @string/enter_your_name}"
+                android:textColor="@color/text_2"
+                android:textSize="@dimen/text_size_mid"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginLeft="@dimen/margin_mid"
+                android:layout_marginRight="@dimen/margin_mid"
+                android:layout_marginBottom="@dimen/margin_large"
+                tools:text="@string/enter_names"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/player_one_name_layout"
+                android:hint="@string/hint_player_1"
+                app:helperTextEnabled="true"
+                android:layout_marginTop="@dimen/margin_smaller"
+                android:layout_marginBottom="@dimen/margin_smaller"
+                app:boxBackgroundColor="@android:color/transparent"
+                style="@style/TextInputLayoutStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player_one_name"
+                    android:inputType="textPersonName|textCapWords"
+                    android:maxLength="8"
+                    android:singleLine="true"
+                    android:backgroundTint="@color/color_primary"
+                    android:textColorHint="@color/text_hint"
+                    android:hint="@string/hint_player_1"
+                    style="@style/TextInputEditTextStyle"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:visibility="@{isTwoPlayer ? View.VISIBLE : View.GONE}"
+                android:id="@+id/player_two_name_layout"
+                android:hint="@string/hint_player_2"
+                android:layout_marginTop="@dimen/margin_smaller"
+                android:layout_marginBottom="@dimen/margin_smaller"
+                app:helperTextEnabled="true"
+                app:boxBackgroundColor="@android:color/transparent"
+                style="@style/TextInputLayoutStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player_two_name"
+                    android:inputType="textPersonName|textCapWords"
+                    android:maxLength="8"
+                    android:singleLine="true"
+                    android:backgroundTint="@color/color_primary"
+                    android:textColorHint="@color/text_hint"
+                    android:hint="@string/hint_player_2"
+                    style="@style/TextInputEditTextStyle"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/continue_to_choose_side"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_mid"
+            android:paddingBottom="@dimen/padding_mid"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:text="@string/continue_text"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/color_primary"
+            android:fontFamily="sans-serif-light"
+            app:cornerRadius="@dimen/border_radius_text_view"
+            app:backgroundTint="@color/white"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/square_dimen"
+            android:layout_height="@dimen/square_dimen"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_largest_negative"
+            android:layout_marginBottom="@dimen/margin_largest_negative"
+            android:src="@drawable/o2"
+            />
+
+    </RelativeLayout>
+</layout>

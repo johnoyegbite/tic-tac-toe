@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_lord">112dp</dimen>
+    <dimen name="margin_largest">56dp</dimen>
+    <dimen name="margin_largest_negative">-56dp</dimen>
+    <dimen name="margin_larger">40dp</dimen>
+    <dimen name="margin_larger_negative">-40dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_large_negative">-32dp</dimen>
+    <dimen name="margin_biggest">28dp</dimen>
+    <dimen name="margin_biggest_negative">-28dp</dimen>
+    <dimen name="margin_bigger">24dp</dimen>
+    <dimen name="margin_bigger_negative">-24dp</dimen>
+    <dimen name="margin_big">20dp</dimen>
+    <dimen name="margin_big_negative">-20dp</dimen>
+    <dimen name="margin_mid">16dp</dimen>
+    <dimen name="margin_mid_negative">-16dp</dimen>
+    <dimen name="margin_small">12dp</dimen>
+    <dimen name="margin_small_negative">-12dp</dimen>
+    <dimen name="margin_smaller">8dp</dimen>
+    <dimen name="margin_smaller_negative">-8dp</dimen>
+    <dimen name="margin_smallest">4dp</dimen>
+    <dimen name="margin_smallest_negative">-4dp</dimen>
+    <dimen name="margin_micro">2dp</dimen>
+    <dimen name="no_margin">0dp</dimen>
+
+    <dimen name="padding_largest">56dp</dimen>
+    <dimen name="padding_larger">40dp</dimen>
+    <dimen name="padding_large">32dp</dimen>
+    <dimen name="padding_biggest">28dp</dimen>
+    <dimen name="padding_bigger">24dp</dimen>
+    <dimen name="padding_big">20dp</dimen>
+    <dimen name="padding_mid">16dp</dimen>
+    <dimen name="padding_small">12dp</dimen>
+    <dimen name="padding_smaller">8dp</dimen>
+    <dimen name="padding_smallest">4dp</dimen>
+    <dimen name="padding_micro">2dp</dimen>
+    <dimen name="no_padding">0dp</dimen>
+
+    <dimen name="text_size_large">56sp</dimen>
+    <dimen name="text_size_biggest">45sp</dimen>
+    <dimen name="text_size_bigger">34sp</dimen>
+    <dimen name="text_size_big">24sp</dimen>
+    <dimen name="text_size_mid">20sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_smaller">14sp</dimen>
+    <dimen name="text_size_smallest">12sp</dimen>
+    <dimen name="text_size_micro">11sp</dimen>
+    <dimen name="text_size_micro_small">10sp</dimen>
+    <dimen name="text_size_micro_smaller">8sp</dimen>
+    
+    <dimen name="player_logo">30dp</dimen>
+    <dimen name="square_dimen">200dp</dimen>
+    <dimen name="square_dimen_small">150dp</dimen>
+
+    <dimen name="logo_dimen">100dp</dimen>
+    <dimen name="bg_logo_width">38dp</dimen>
+    <dimen name="bg_logo_height">65dp</dimen>
+
+    <dimen name="border_radius_button">52dp</dimen>
+    <dimen name="border_radius_text_view">10dp</dimen>
+    <dimen name="border_radius_progress">100dp</dimen>
+
+    <dimen name="margin_from_fab">120dp</dimen>
+    <dimen name="audio_thumb_radius">5dp</dimen>
+    <dimen name="default_thumb_radius">8dp</dimen>
+    <dimen name="volume_thumb_radius">15dp</dimen>
+
+    <dimen name="volume_bar_height">350dp</dimen>
+
+    <dimen name="width_smallest">4dp</dimen>
+    <dimen name="width_micro">2dp</dimen>
+    <dimen name="no_width">0dp</dimen>
+
+    <dimen name="details_height">72dp</dimen>
+
+    <dimen name="icon_size_small">10dp</dimen>
+
+    <dimen name="scroll_bar_size">4dp</dimen>
+    <dimen name="scroll_bar_size_mini">2dp</dimen>
+
+    <dimen name="card_padding_top">8dp</dimen>
+    <dimen name="card_padding_left">12dp</dimen>
+    <dimen name="card_margin_top">8dp</dimen>
+    <dimen name="card_margin_left">16dp</dimen>
+    <dimen name="card_margin">24dp</dimen>
+
+</resources>

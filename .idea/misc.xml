@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/drawable/ic_baseline_gps_not_fixed_24.xml" value="0.262037037037037" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/drawable/round_btn_neon_green.xml" value="0.290625" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/drawable/round_btn_neon_pink.xml" value="0.290625" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/layout/activity_choose_play_mode.xml" value="0.2545289855072464" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/layout/activity_choose_your_side.xml" value="0.2545289855072464" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/layout/activity_enter_player_name.xml" value="0.2545289855072464" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/layout/activity_scene.xml" value="0.264" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/layout/activity_splash.xml" value="0.2545289855072464" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/layout/dialog_exit.xml" value="0.2545289855072464" />
+        <entry key="..\:/Users/Oyegbite/Desktop/John/BG/AndroidStudioProjects/TicTacToe/TicTacToe/app/src/main/res/layout/dialog_play_again.xml" value="0.2545289855072464" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
