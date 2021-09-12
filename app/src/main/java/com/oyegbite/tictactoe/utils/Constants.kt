@@ -1,6 +1,8 @@
 package com.oyegbite.tictactoe.utils
 
 import android.os.Environment
+import com.oyegbite.tictactoe.MainActivity
+import com.oyegbite.tictactoe.activities.*
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -37,6 +39,8 @@ class Constants private constructor() {
 
         const val KEY_SAVED_ACTIVITY = "SAVED_ACTIVITY"
 
+        const val KEY_VIBRATION_ACTIVE = "VIBRATION_ACTIVE"
+
         const val CONCATENATION_DELIMITER = "___" // For Database concatenation.
 
         const val APP_DEFAULT_DATE = "2021-02-02 00:00:00"
@@ -60,6 +64,15 @@ class Constants private constructor() {
         val monthsAbbrev: Set<String> = HashSet(listOf("mo", "mos", "mth", "mths", "month", "months"))
 
         val yearsAbbrev: Set<String> = HashSet(listOf("y", "yr", "yrs", "year", "years"))
+    }
+
+    object Activity {
+        const val MainActivity = 1
+        const val ChoosePlayMode = 1
+        const val EnterPlayerName = 2
+        const val ChooseYourSide = 3
+        const val Scene = 4
+        const val Settings = 5
     }
 
     object Developer {

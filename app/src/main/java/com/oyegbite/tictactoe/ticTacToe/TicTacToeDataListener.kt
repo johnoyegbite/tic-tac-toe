@@ -6,4 +6,5 @@ interface TicTacToeDataListener {
 
     fun updateGameOverState(isGameOver: Boolean, winnerSideOrDraw: String)
 
+    fun vibrateDevice(vibrationMills: Long)
 }

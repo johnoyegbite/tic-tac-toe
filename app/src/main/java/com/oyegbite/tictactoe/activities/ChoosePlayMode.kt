@@ -31,7 +31,7 @@ class ChoosePlayMode : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_choose_play_mode)
         mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, ChoosePlayMode::class.java)
+        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.ChoosePlayMode)
 
         setBindings()
     }
@@ -59,7 +59,7 @@ class ChoosePlayMode : AppCompatActivity() {
         if (mIsBackBtnDoubleClicked) {
             super.onBackPressed()
             stopTimer()
-            mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, MainActivity::class.java)
+            mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.MainActivity)
             finishAffinity()
             return
         }

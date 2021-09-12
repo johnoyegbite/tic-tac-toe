@@ -16,6 +16,11 @@
     <color name="text_2">#DC0C2653</color>
     <color name="text_hint">#6A777D88</color>
     <color name="black_transparent">#CC000000</color>
+    <color name="disabled_txt">#666666</color>
+    <color name="disabled_text_dim">#4D666666</color>
+
+
+
 
     <!-- Used as the stroke color of all outlined layouts -->
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">

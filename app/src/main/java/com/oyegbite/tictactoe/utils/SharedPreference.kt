@@ -54,7 +54,6 @@ class SharedPreference(context: Context) {
                     } catch (e: Exception) {
                         return PUT_FAIL
                     }
-                    return PUT_FAIL
                 }
             }
         }
@@ -108,7 +107,11 @@ class SharedPreference(context: Context) {
                 Log.i(TAG, "getValue() => key: $key, value: '$value', default: '$defaultValue'")
                 value
             }
-            Int::class.java -> mSharedPreferences.getInt(key, defaultValue as Int) as T
+            Int::class.java -> {
+                val value = mSharedPreferences.getInt(key, defaultValue as Int) as T
+                Log.i(TAG, "getValue() => key: $key, value: $value, default: $defaultValue")
+                value
+            }
             Float::class.java -> mSharedPreferences.getFloat(key, defaultValue as Float) as T
             Long::class.java -> mSharedPreferences.getLong(key, defaultValue as Long) as T
             Boolean::class.java -> mSharedPreferences.getBoolean(key, defaultValue as Boolean) as T

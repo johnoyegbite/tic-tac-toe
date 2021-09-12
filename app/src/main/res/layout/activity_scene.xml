@@ -39,235 +39,271 @@
             type="String" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
+        android:background="@color/bg_white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_white"
-        android:gravity="center"
         tools:context=".activities.Scene">
 
         <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/bg_white"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            tools:context=".activities.Scene">
 
             <LinearLayout
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/player_logo"
-                    android:layout_height="@dimen/player_logo"
-                    android:src="@{isPlayerOneTurn ? (isPlayerOneX ? @drawable/x : @drawable/o2) : (isPlayerOneX ? @drawable/o2 : @drawable/x)}"
-                    tools:src="@drawable/x"
-                    android:alpha="0.5"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/turn"
-                    android:textColor="@color/text_2"
-                    android:textSize="@dimen/text_size_small"
-                    android:gravity="center"
-                    tools:text="turn"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:gravity="center"
-                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{playerOneName}"
-                        android:textColor="@color/text_2"
-                        android:textSize="@dimen/text_size_mid"
-                        android:gravity="center"
-                        tools:text="Oyegbite"
-                        />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="@dimen/player_logo"
                         android:layout_height="@dimen/player_logo"
-                        android:src="@{isPlayerOneX ? @drawable/x : @drawable/o2}"
+                        android:src="@{isPlayerOneTurn ? (isPlayerOneX ? @drawable/x : @drawable/o2) : (isPlayerOneX ? @drawable/o2 : @drawable/x)}"
                         tools:src="@drawable/x"
+                        android:alpha="0.5"
+                        />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/turn"
+                        android:textColor="@color/text_2"
+                        android:textSize="@dimen/text_size_small"
+                        android:gravity="center"
+                        tools:text="turn"
                         />
 
                 </LinearLayout>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_marginStart="@dimen/card_margin"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:layout_marginTop="@dimen/padding_smallest"
-                    android:layout_marginBottom="@dimen/padding_smallest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/bg_white"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="@dimen/padding_bigger"
-                    app:cardElevation="@dimen/padding_mid">
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:background="@color/white"
-                        android:paddingTop="@dimen/padding_smaller"
-                        android:paddingBottom="@dimen/padding_smaller"
-                        android:paddingLeft="@dimen/padding_small"
-                        android:paddingRight="@dimen/padding_small"
+                        android:gravity="center"
                         android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:gravity="center"
-                            android:layout_gravity="center_horizontal"
-                            android:orientation="horizontal"
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:text="@{playerOneName}"
+                            android:textColor="@color/text_2"
+                            android:textSize="@dimen/text_size_mid"
+                            android:gravity="center"
+                            tools:text="Oyegbite"
+                            />
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@{`` + playerOneScore}"
-                                android:textColor="@color/text_2"
-                                android:textSize="@dimen/text_size_big"
-                                android:gravity="center"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="@dimen/margin_small"
-                                android:layout_marginRight="@dimen/margin_small"
-                                tools:text="4"
-                                />
-
-                            <View
-                                android:layout_width="2dp"
-                                android:layout_height="match_parent"
-                                android:background="@color/text_hint"
-                                />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@{`` + playerTwoScore}"
-                                android:textColor="@color/text_2"
-                                android:textSize="@dimen/text_size_big"
-                                android:gravity="center"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="@dimen/margin_small"
-                                android:layout_marginRight="@dimen/margin_small"
-                                tools:text="10"
-                                />
-
-                        </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/player_logo"
+                            android:layout_height="@dimen/player_logo"
+                            android:src="@{isPlayerOneX ? @drawable/x : @drawable/o2}"
+                            tools:src="@drawable/x"
+                            />
 
                     </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textview.MaterialTextView
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_marginStart="@dimen/card_margin"
+                        android:layout_marginEnd="@dimen/card_margin"
+                        android:layout_marginTop="@dimen/padding_smallest"
+                        android:layout_marginBottom="@dimen/padding_smallest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{playerTwoName}"
-                        android:textColor="@color/text_2"
-                        android:textSize="@dimen/text_size_mid"
-                        android:gravity="center"
-                        tools:text="John"
-                        />
+                        android:background="@color/bg_white"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="@dimen/padding_bigger"
+                        app:cardElevation="@dimen/padding_mid">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/player_logo"
-                        android:layout_height="@dimen/player_logo"
-                        android:src="@{isPlayerOneX ? @drawable/o2 : @drawable/x}"
-                        tools:src="@drawable/o2"
-                        />
+                        <LinearLayout
+                            android:background="@color/white"
+                            android:paddingTop="@dimen/padding_smaller"
+                            android:paddingBottom="@dimen/padding_smaller"
+                            android:paddingLeft="@dimen/padding_small"
+                            android:paddingRight="@dimen/padding_small"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{`` + playerOneScore}"
+                                    android:textColor="@color/text_2"
+                                    android:textSize="@dimen/text_size_big"
+                                    android:gravity="center"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/margin_small"
+                                    android:layout_marginRight="@dimen/margin_small"
+                                    tools:text="4"
+                                    />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/text_hint"
+                                    />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{`` + playerTwoScore}"
+                                    android:textColor="@color/text_2"
+                                    android:textSize="@dimen/text_size_big"
+                                    android:gravity="center"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/margin_small"
+                                    android:layout_marginRight="@dimen/margin_small"
+                                    tools:text="10"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{playerTwoName}"
+                            android:textColor="@color/text_2"
+                            android:textSize="@dimen/text_size_mid"
+                            android:gravity="center"
+                            tools:text="John"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/player_logo"
+                            android:layout_height="@dimen/player_logo"
+                            android:src="@{isPlayerOneX ? @drawable/o2 : @drawable/x}"
+                            tools:src="@drawable/o2"
+                            />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_marginStart="@dimen/card_margin_left"
+                android:layout_marginEnd="@dimen/card_margin_left"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/padding_smallest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_gravity="center"
+                app:cardCornerRadius="@dimen/padding_mid"
+                app:cardElevation="@dimen/padding_mid">
+
+                <LinearLayout
+                    android:background="@color/white"
+                    android:padding="@dimen/padding_mid"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.oyegbite.tictactoe.ticTacToe.TicTacToeBoard
+                        android:id="@+id/tic_tac_toe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        custom:boardColor="@color/text_hint"
+                        custom:boardRowByCol="3"
+                        custom:oColor="@color/neon_green"
+                        custom:xColor="@color/neon_pink"
+                        />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/game_over_board"
+                android:layout_marginStart="@dimen/card_margin"
+                android:layout_marginEnd="@dimen/card_margin"
+                android:layout_marginTop="@dimen/padding_smaller"
+                android:layout_marginBottom="@dimen/padding_smallest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_gravity="center"
+                android:alpha="@{gameOver ? 1F : 0F}"
+                app:cardCornerRadius="@dimen/padding_bigger"
+                app:cardElevation="@dimen/padding_mid">
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{winnersName}"
+                    android:textColor="@color/text_2"
+                    android:textSize="@dimen/text_size_big"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/white"
+                    tools:text="AI wins"
+                    />
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginStart="@dimen/card_margin_left"
-            android:layout_marginEnd="@dimen/card_margin_left"
-            android:layout_marginTop="@dimen/margin_large"
-            android:layout_marginBottom="@dimen/padding_smallest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:layout_gravity="center"
-            app:cardCornerRadius="@dimen/padding_mid"
-            app:cardElevation="@dimen/padding_mid">
-
-            <LinearLayout
-                android:background="@color/white"
-                android:padding="@dimen/padding_mid"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.oyegbite.tictactoe.ticTacToe.TicTacToeBoard
-                    android:id="@+id/tic_tac_toe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    custom:boardColor="@color/text_hint"
-                    custom:boardRowByCol="3"
-                    custom:oColor="@color/neon_green"
-                    custom:xColor="@color/neon_pink"
-                    />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/game_over_board"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_mid"
             android:layout_marginStart="@dimen/card_margin"
             android:layout_marginEnd="@dimen/card_margin"
             android:layout_marginTop="@dimen/padding_smaller"
-            android:layout_marginBottom="@dimen/padding_smallest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_gravity="center"
-            android:alpha="@{gameOver ? 1F : 0F}"
             app:cardCornerRadius="@dimen/padding_bigger"
             app:cardElevation="@dimen/padding_mid">
 
-            <com.google.android.material.button.MaterialButton
+            <ImageButton
+                android:id="@+id/settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{winnersName}"
-                android:textColor="@color/text_2"
-                android:textSize="@dimen/text_size_big"
-                android:gravity="center"
-                android:layout_gravity="center"
+                android:src="@drawable/ic_settings"
                 android:backgroundTint="@color/white"
-                tools:text="AI wins"
-                />
+                custom:tint="@color/color_primary" />
 
         </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
+    </RelativeLayout>
+
 </layout>

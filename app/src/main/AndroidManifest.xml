@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.oyegbite.tictactoe">
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,27 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TicTacToe">
-
+        <activity
+            android:name=".activities.Settings"
+            android:exported="true" />
         <activity
             android:name=".activities.ChooseYourSide"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.Scene"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.EnterPlayerName"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ChoosePlayMode"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true"

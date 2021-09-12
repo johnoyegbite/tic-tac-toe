@@ -7,8 +7,7 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
-import com.oyegbite.tictactoe.activities.ChoosePlayMode
-import com.oyegbite.tictactoe.activities.Scene
+import com.oyegbite.tictactoe.activities.*
 import com.oyegbite.tictactoe.databinding.ActivitySplashBinding
 import com.oyegbite.tictactoe.utils.Constants
 import com.oyegbite.tictactoe.utils.SharedPreference
@@ -38,19 +37,57 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-//        val getSavedActivity = mSharedPreference.getValue(
-//            String::class.java,
-//            Constants.KEY_SAVED_ACTIVITY,
-//            ChoosePlayMode::class.java
-//        )
-
-        startCountDownTimer()
+        if (!canNavigateToSavedActivity()) {
+            startCountDownTimer()
+        }
     }
 
     private fun navigateToScene() {
         val scene = Intent(this, Scene::class.java)
         startActivity(scene)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+
+    private fun canNavigateToSavedActivity(): Boolean {
+        val savedActivityNumber = mSharedPreference.getValue(
+            Int::class.java,
+            Constants.KEY_SAVED_ACTIVITY,
+            Constants.Activity.MainActivity
+        )
+
+        when(savedActivityNumber) {
+            Constants.Activity.ChoosePlayMode -> {
+                val scene = Intent(this, ChoosePlayMode::class.java)
+                startActivity(scene)
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                return true
+            }
+            Constants.Activity.EnterPlayerName -> {
+                val scene = Intent(this, EnterPlayerName::class.java)
+                startActivity(scene)
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                return true
+            }
+            Constants.Activity.ChooseYourSide -> {
+                val scene = Intent(this, ChooseYourSide::class.java)
+                startActivity(scene)
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                return true
+            }
+            Constants.Activity.Scene -> {
+                val scene = Intent(this, Scene::class.java)
+                startActivity(scene)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                return true
+            }
+            Constants.Activity.Settings -> {
+                val scene = Intent(this, Settings::class.java)
+                startActivity(scene)
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                return true
+            }
+        }
+        return false
     }
 
     private fun startCountDownTimer() {

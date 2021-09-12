@@ -27,7 +27,7 @@ class EnterPlayerName : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_enter_player_name)
         mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, EnterPlayerName::class.java)
+        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.EnterPlayerName)
 
         mBinding.isTwoPlayer = AppUtils.isTwoPlayerMode(TAG, mSharedPreference)
         setDefaultPlayerNames()

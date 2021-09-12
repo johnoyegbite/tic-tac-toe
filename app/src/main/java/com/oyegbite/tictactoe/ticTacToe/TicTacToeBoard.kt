@@ -183,6 +183,10 @@ class TicTacToeBoard(
         }
     }
 
+    private fun vibrateDevice(vibrateMills: Long) {
+        mTicTacToeDataListener?.vibrateDevice(vibrateMills)
+    }
+
     /**
      * @param winState which is either "Draw", "Pending", "Player 1", "Player 2"
      *  @see R.string.draw
@@ -192,9 +196,16 @@ class TicTacToeBoard(
      */
     private fun checkIfGameOverAfterPlay(winState: String) {
         Log.i(TAG, "winState = '$winState'")
-        if (winState == context.getString(R.string.pending)) return
+        if (winState == context.getString(R.string.pending)) {
+            vibrateDevice(100L)
+            return
+        }
         mTicTacToeDataListener?.updateGameOverState(true, winState)
-        if (winState == context.getString(R.string.draw)) return
+        if (winState == context.getString(R.string.draw)) {
+            vibrateDevice(100L)
+            return
+        }
+        vibrateDevice(500L) // A player won hence longer vibration
     }
 
     private fun switchPlayer() {

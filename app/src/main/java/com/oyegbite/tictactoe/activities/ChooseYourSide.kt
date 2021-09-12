@@ -25,7 +25,7 @@ class ChooseYourSide : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_choose_your_side)
         mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, ChooseYourSide::class.java)
+        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.ChooseYourSide)
 
         setBindings()
     }

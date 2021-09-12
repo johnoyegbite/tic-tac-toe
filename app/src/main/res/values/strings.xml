@@ -30,7 +30,7 @@
     <string name="pick_your_side">Pick your side</string>
     <string name="player1_pick">%s, pick your side</string>
     <string name="turn">turn</string>
-    
+
     <string name="touch_to_exit">Touch again to exit</string>
     <string name="choose_another_name">Name "AI" is reserved for computer</string>
 
@@ -44,5 +44,7 @@
     <string name="win_direction_lead_diagonal">Leading diagonal</string>
     <string name="win_direction_opp_lead_diagonal">Opposite leading diagonal</string>
     <string name="win_direction_none">None</string>
+
+    <string name="vibration">Vibration</string>
 
 </resources>

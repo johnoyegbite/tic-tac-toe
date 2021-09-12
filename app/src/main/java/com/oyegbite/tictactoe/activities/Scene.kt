@@ -1,10 +1,10 @@
 package com.oyegbite.tictactoe.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -14,11 +14,14 @@ import com.oyegbite.tictactoe.models.GameMoves
 import com.oyegbite.tictactoe.ticTacToe.TicTacToeDataListener
 import com.oyegbite.tictactoe.utils.*
 import java.util.*
-import android.view.WindowManager
 
-import android.view.Gravity
-import android.view.Window
 import androidx.appcompat.app.AlertDialog
+import android.os.VibrationEffect
+
+import android.os.Build
+
+import android.os.Vibrator
+import android.view.*
 
 
 class Scene : AppCompatActivity(), TicTacToeDataListener {
@@ -35,13 +38,13 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_scene)
         mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Scene::class.java)
+        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.Scene)
 
         mBinding.ticTacToe.initListener(this)
+        setBindings()
         setStartingFields()
 //        drawSavedGame()
     }
-
 
     private fun setStartingFields() {
         // Set Player1 and Player2 names
@@ -87,6 +90,33 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
             Constants.KEY_IS_PLAYER_ONE_TURN,
             true
         )
+    }
+
+    private fun setBindings() {
+        mBinding.settings.setOnClickListener(View.OnClickListener {
+            val settings = Intent(this, Settings::class.java)
+            startActivity(settings)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        })
+    }
+
+    override fun vibrateDevice(vibrationMills: Long) {
+        val isVibrationActive = mSharedPreference.getValue(
+            Boolean::class.java,
+            Constants.KEY_VIBRATION_ACTIVE,
+            false
+        ) == true
+
+        if (isVibrationActive) {
+            val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(vibrationMills, VibrationEffect.DEFAULT_AMPLITUDE))
+
+            } else {
+                //deprecated in API 26
+                v.vibrate(vibrationMills)
+            }
+        }
     }
 
     override fun updateNextPlayerTurn() {
