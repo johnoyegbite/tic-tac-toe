@@ -3,7 +3,10 @@ package com.oyegbite.tictactoe.utils
 import android.content.Context
 import android.util.Log
 import android.view.Gravity
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 
 class AppUtils private constructor(){
 
@@ -39,6 +42,14 @@ class AppUtils private constructor(){
             )
             Log.i(TAG, "playMode = $playMode")
             return playMode == Constants.VALUE_PLAY_MODE_FRIEND
+        }
+
+        fun displayDialogAt(dialog: AlertDialog, position: Int) {
+            val window: Window? = dialog.window
+            val wlp: WindowManager.LayoutParams? = window?.attributes
+            wlp?.gravity = position
+            window?.attributes = wlp
+            window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         }
 
     }

@@ -37,6 +37,7 @@
         <variable
             name="winnersName"
             type="String" />
+
     </data>
 
     <RelativeLayout
@@ -241,7 +242,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         custom:boardColor="@color/text_hint"
-                        custom:boardRowByCol="3"
+                        custom:boardDimension="3"
                         custom:oColor="@color/neon_green"
                         custom:xColor="@color/neon_pink"
                         />

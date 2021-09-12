@@ -90,6 +90,7 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
             Constants.KEY_IS_PLAYER_ONE_TURN,
             true
         )
+
     }
 
     private fun setBindings() {
@@ -98,25 +99,6 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
             startActivity(settings)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         })
-    }
-
-    override fun vibrateDevice(vibrationMills: Long) {
-        val isVibrationActive = mSharedPreference.getValue(
-            Boolean::class.java,
-            Constants.KEY_VIBRATION_ACTIVE,
-            false
-        ) == true
-
-        if (isVibrationActive) {
-            val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                v.vibrate(VibrationEffect.createOneShot(vibrationMills, VibrationEffect.DEFAULT_AMPLITUDE))
-
-            } else {
-                //deprecated in API 26
-                v.vibrate(vibrationMills)
-            }
-        }
     }
 
     override fun updateNextPlayerTurn() {
@@ -205,7 +187,7 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
             .show()
 
         // Display dialog at bottom of screen
-        displayDialogAt(dialog, Gravity.BOTTOM)
+        AppUtils.displayDialogAt(dialog, Gravity.BOTTOM)
     }
 
     private fun showExitGameDialog() {
@@ -237,15 +219,7 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
             .show()
 
         // Display dialog at bottom of screen
-        displayDialogAt(dialog, Gravity.BOTTOM)
-    }
-
-    private fun displayDialogAt(dialog: AlertDialog, position: Int) {
-        val window: Window? = dialog.window
-        val wlp: WindowManager.LayoutParams? = window?.attributes
-        wlp?.gravity = position
-        window?.attributes = wlp
-        window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        AppUtils.displayDialogAt(dialog, Gravity.BOTTOM)
     }
 
     private fun navigateUserToHome() {
@@ -287,6 +261,25 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
         shouldCancelCurrDialog = !isGameOver
         if (!isGameOver) {
             showExitGameDialog()
+        }
+    }
+
+    override fun vibrateDevice(vibrationMills: Long) {
+        val isVibrationActive = mSharedPreference.getValue(
+            Boolean::class.java,
+            Constants.KEY_VIBRATION_ACTIVE,
+            false
+        ) == true
+
+        if (isVibrationActive) {
+            val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(vibrationMills, VibrationEffect.DEFAULT_AMPLITUDE))
+
+            } else {
+                //deprecated in API 26
+                v.vibrate(vibrationMills)
+            }
         }
     }
 

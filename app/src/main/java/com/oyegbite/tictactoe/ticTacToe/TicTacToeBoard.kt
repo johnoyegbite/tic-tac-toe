@@ -35,8 +35,6 @@ class TicTacToeBoard(
     private var mSharedPreference: SharedPreference = SharedPreference(context)
     private val mXColor: Int
     private val mOColor: Int
-    private val mWinningLineColorPlayerOne: Int
-    private val mWinningLineColorPlayerTwo: Int
     private var mBoardDimension: Int = 3 // 3 x 3 board
     private var mBoardWidth: Int = width
     private val mBoardColor: Int
@@ -60,12 +58,6 @@ class TicTacToeBoard(
             mBoardColor =
                 mAttributeArray.getInteger(R.styleable.TicTacToeBoard_boardColor, 0)
 
-            mWinningLineColorPlayerOne =
-                mAttributeArray.getInteger(R.styleable.TicTacToeBoard_winningLineColorPlayerOne, 0)
-
-            mWinningLineColorPlayerTwo =
-                mAttributeArray.getInteger(R.styleable.TicTacToeBoard_winningLineColorPlayerTwo, 0)
-
             mXColor =
                 mAttributeArray.getInteger(R.styleable.TicTacToeBoard_xColor, 0)
 
@@ -73,7 +65,7 @@ class TicTacToeBoard(
                 mAttributeArray.getInteger(R.styleable.TicTacToeBoard_oColor, 0)
 
             mBoardDimension =
-                mAttributeArray.getInteger(R.styleable.TicTacToeBoard_boardRowByCol, 3)
+                mAttributeArray.getInteger(R.styleable.TicTacToeBoard_boardDimension, 3)
 
         } finally {
             mAttributeArray.recycle()
@@ -91,6 +83,15 @@ class TicTacToeBoard(
         // Get minimum dimension from the width and height of player's device,
         // and also remove required space.
         mBoardWidth = measuredHeight.coerceAtMost(measuredWidth) - spaceAroundBoard
+
+        mSharedPreference.getValue(
+            Int::class.java,
+            Constants.KEY_BOARD_DIMENSION,
+            3
+        )?.let {
+            mBoardDimension = it
+            mGameLogic.updateBoardDimension(mBoardDimension)
+        }
 
         mCellSize = mBoardWidth / mBoardDimension
         mCellPadding = 0.15F * mCellSize

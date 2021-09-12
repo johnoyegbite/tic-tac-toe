@@ -10,6 +10,9 @@
     <string name="confirm_exit">Do you want to exit?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="data_would_be_cleared">
+        Board dimension has been modified and game would be reset.\nDo you want to continue?
+    </string>
 
     <string name="choose_play_mode">Choose your play mode</string>
     <string name="with_ai">With AI</string>
@@ -46,5 +49,6 @@
     <string name="win_direction_none">None</string>
 
     <string name="vibration">Vibration</string>
+    <string name="board_dimension">Board dimension</string>
 
 </resources>

@@ -41,6 +41,8 @@ class Constants private constructor() {
 
         const val KEY_VIBRATION_ACTIVE = "VIBRATION_ACTIVE"
 
+        const val KEY_BOARD_DIMENSION = "BOARD_DIMENSION"
+
         const val CONCATENATION_DELIMITER = "___" // For Database concatenation.
 
         const val APP_DEFAULT_DATE = "2021-02-02 00:00:00"

@@ -17,7 +17,7 @@ class TicTacToeLogic(context: Context, dimension: Int) {
 
     private var mSharedPreference: SharedPreference = SharedPreference(context)
 
-    private var mGameDimension: Int = dimension
+    private var mBoardDimension: Int = dimension
     private var mMoves: ArrayList<IntArray> = arrayListOf()
     private var mVisitedCells: MutableSet<String> = mutableSetOf()
     private var mContext: Context = context
@@ -34,6 +34,10 @@ class TicTacToeLogic(context: Context, dimension: Int) {
         Log.i(TAG, "mFirstPlayer updated to $mFirstPlayer")
         mSharedPreference.putValue(Constants.KEY_FIRST_PLAYER, firstPlayer)
         mFirstPlayer = firstPlayer
+    }
+
+    fun updateBoardDimension(boardDim: Int) {
+        mBoardDimension = boardDim
     }
 
     fun getWinDirection(): String {
@@ -61,8 +65,8 @@ class TicTacToeLogic(context: Context, dimension: Int) {
 
     fun getAvailableMove(): IntArray {
         val availableCells = arrayListOf<IntArray>()
-        for (row in 0 until mGameDimension) {
-            for (col in 0 until mGameDimension) {
+        for (row in 0 until mBoardDimension) {
+            for (col in 0 until mBoardDimension) {
                 val cell = getKey(row, col)
                 if (!mVisitedCells.contains(cell)) {
                     availableCells.add(intArrayOf(row, col))
@@ -74,7 +78,7 @@ class TicTacToeLogic(context: Context, dimension: Int) {
     }
 
     fun boardHasEmptyCell(): Boolean {
-        return (mGameDimension * mGameDimension) - getMovesPlayed().size > 0
+        return (mBoardDimension * mBoardDimension) - getMovesPlayed().size > 0
     }
 
     private fun getKey(row: Int, col: Int): String {
@@ -92,7 +96,7 @@ class TicTacToeLogic(context: Context, dimension: Int) {
      * Add only to [mMoves] if board is not filled and cell is empty
      */
     fun addToMoves(cell: IntArray): Boolean {
-        if (mMoves.size >= mGameDimension * mGameDimension) return false
+        if (mMoves.size >= mBoardDimension * mBoardDimension) return false
 
         val (row, col) = cell
         val moveWasAdded = mVisitedCells.add(getKey(row, col))
@@ -138,7 +142,7 @@ class TicTacToeLogic(context: Context, dimension: Int) {
         // 9  (2 x 5 - 1) = A B A B A B A B A = 5 X 5 (for a 5 by 5 board)
         // 11 (2 x 6 - 1) = A B A B A B A B A B A = 6 X 6 (for a 6 by 6 board)
         //     ...        =   ...
-        val boardDim = mGameDimension // Dimension of the board
+        val boardDim = mBoardDimension // Dimension of the board
         val minLenToGetAWin = 2 * boardDim - 1
         if (moves.size < minLenToGetAWin) {
             return mContext.getString(R.string.pending)
