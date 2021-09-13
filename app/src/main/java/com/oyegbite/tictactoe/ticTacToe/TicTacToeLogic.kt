@@ -63,7 +63,7 @@ class TicTacToeLogic(context: Context, dimension: Int) {
         mMoves = moves
     }
 
-    fun getAvailableMove(): IntArray {
+    fun getAIAvailableMoveRandom(): IntArray {
         val availableCells = arrayListOf<IntArray>()
         for (row in 0 until mBoardDimension) {
             for (col in 0 until mBoardDimension) {
@@ -75,6 +75,21 @@ class TicTacToeLogic(context: Context, dimension: Int) {
         }
         // Pick a random cell
         return availableCells.random()
+    }
+
+    fun getAIAvailableMoveEasy(): IntArray {
+        return intArrayOf()
+        TODO("AI Easy Not yet Implemented")
+    }
+
+    fun getAIAvailableMoveMedium(): IntArray {
+        return intArrayOf()
+        TODO("AI Medium Not yet Implemented")
+    }
+
+    fun getAIAvailableMoveHard(): IntArray {
+        return intArrayOf()
+        TODO("AI Hard Not yet Implemented")
     }
 
     fun boardHasEmptyCell(): Boolean {

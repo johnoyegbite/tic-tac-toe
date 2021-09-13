@@ -25,7 +25,7 @@ class ChooseYourSide : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_choose_your_side)
         mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.ChooseYourSide)
+        mSharedPreference.putValue(Constants.KEY_SAVED_CURRENT_ACTIVITY, Constants.Activity.ChooseYourSide)
 
         setBindings()
     }
@@ -73,9 +73,7 @@ class ChooseYourSide : AppCompatActivity() {
 
         mBinding.startGame.setOnClickListener(View.OnClickListener {
             resetFields()
-            val scene = Intent(this, Scene::class.java)
-            startActivity(scene)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            navigateToNextActivity()
         })
     }
 
@@ -89,8 +87,16 @@ class ChooseYourSide : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val enterPlayerName = Intent(this, EnterPlayerName::class.java)
-        startActivity(enterPlayerName)
+        navigateToPreviousActivity()
+    }
+
+    private fun navigateToNextActivity() {
+        startActivity(Intent(this, Scene::class.java))
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+
+    private fun navigateToPreviousActivity() {
+        startActivity(Intent(this, EnterPlayerName::class.java))
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 }

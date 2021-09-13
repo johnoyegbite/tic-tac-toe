@@ -1,98 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_white"
-        android:gravity="center"
         tools:context=".activities.ChoosePlayMode">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_white"
+            android:gravity="center">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/square_dimen_small"
-                    android:layout_height="@dimen/square_dimen_small"
-                    android:src="@drawable/x"
-                    />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/square_dimen_small"
-                    android:layout_height="@dimen/square_dimen_small"
-                    android:src="@drawable/o2"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="@dimen/margin_big"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/choose_play_mode"
-                    android:textColor="@color/text_2"
-                    android:textSize="@dimen/text_size_mid"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:fontFamily="sans-serif-light"
-                    android:layout_marginLeft="@dimen/margin_mid"
-                    android:layout_marginRight="@dimen/margin_mid"
-                    />
 
                 <LinearLayout
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/margin_mid"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/play_ai"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_smaller"
-                        android:layout_marginRight="@dimen/margin_smaller"
-                        android:paddingTop="@dimen/padding_mid"
-                        android:paddingBottom="@dimen/padding_mid"
-                        android:text="@string/with_ai"
-                        android:textSize="@dimen/text_size_small"
-                        android:textColor="@color/white"
-                        android:fontFamily="sans-serif-light"
-                        app:cornerRadius="@dimen/border_radius_text_view"
-                        app:backgroundTint="@color/color_primary"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/square_dimen_small"
+                        android:layout_height="@dimen/square_dimen_small"
+                        android:src="@drawable/x"
                         />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/play_friend"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_smaller"
-                        android:layout_marginRight="@dimen/margin_smaller"
-                        android:paddingTop="@dimen/padding_mid"
-                        android:paddingBottom="@dimen/padding_mid"
-                        android:text="@string/with_a_friend"
-                        android:textSize="@dimen/text_size_small"
-                        android:textColor="@color/color_primary"
-                        android:fontFamily="sans-serif-light"
-                        app:cornerRadius="@dimen/border_radius_text_view"
-                        app:backgroundTint="@color/white"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/square_dimen_small"
+                        android:layout_height="@dimen/square_dimen_small"
+                        android:src="@drawable/o2"
                         />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/margin_big"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_play_mode"
+                        android:textColor="@color/text_2"
+                        android:textSize="@dimen/text_size_mid"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:layout_marginLeft="@dimen/margin_mid"
+                        android:layout_marginRight="@dimen/margin_mid"
+                        />
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin_mid"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/play_ai"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_smaller"
+                            android:layout_marginRight="@dimen/margin_smaller"
+                            android:paddingTop="@dimen/padding_mid"
+                            android:paddingBottom="@dimen/padding_mid"
+                            android:text="@string/with_ai"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/white"
+                            android:fontFamily="sans-serif-light"
+                            app:cornerRadius="@dimen/border_radius_text_view"
+                            app:backgroundTint="@color/color_primary"
+                            />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/play_friend"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_smaller"
+                            android:layout_marginRight="@dimen/margin_smaller"
+                            android:paddingTop="@dimen/padding_mid"
+                            android:paddingBottom="@dimen/padding_mid"
+                            android:text="@string/with_a_friend"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/color_primary"
+                            android:fontFamily="sans-serif-light"
+                            app:cornerRadius="@dimen/border_radius_text_view"
+                            app:backgroundTint="@color/white"
+                            />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -100,6 +106,31 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_mid"
+            android:layout_marginStart="@dimen/card_margin"
+            android:layout_marginEnd="@dimen/card_margin"
+            android:layout_marginTop="@dimen/padding_smaller"
+            android:layout_width="@dimen/border_radius_button"
+            android:layout_height="@dimen/border_radius_button"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            app:cardCornerRadius="52dp"
+            app:cardElevation="@dimen/padding_mid">
+
+            <ImageButton
+                android:id="@+id/settings"
+                android:layout_width="@dimen/border_radius_button"
+                android:layout_height="@dimen/border_radius_button"
+                android:src="@drawable/ic_settings"
+                android:scaleType="fitXY"
+                android:backgroundTint="@color/white"
+                app:tint="@color/color_primary" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
 
 </layout>

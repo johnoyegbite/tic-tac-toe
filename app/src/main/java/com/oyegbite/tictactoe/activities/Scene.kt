@@ -15,7 +15,6 @@ import com.oyegbite.tictactoe.ticTacToe.TicTacToeDataListener
 import com.oyegbite.tictactoe.utils.*
 import java.util.*
 
-import androidx.appcompat.app.AlertDialog
 import android.os.VibrationEffect
 
 import android.os.Build
@@ -38,12 +37,12 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_scene)
         mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.Scene)
+        mSharedPreference.putValue(Constants.KEY_SAVED_CURRENT_ACTIVITY, Constants.Activity.Scene)
 
         mBinding.ticTacToe.initListener(this)
         setBindings()
         setStartingFields()
-//        drawSavedGame()
+        drawSavedGame()
     }
 
     private fun setStartingFields() {
@@ -95,8 +94,8 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
 
     private fun setBindings() {
         mBinding.settings.setOnClickListener(View.OnClickListener {
-            val settings = Intent(this, Settings::class.java)
-            startActivity(settings)
+            mSharedPreference.putValue(Constants.KEY_SAVED_PREVIOUS_ACTIVITY, Constants.Activity.Scene)
+            startActivity(Intent(this, Settings::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         })
     }
@@ -131,13 +130,14 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
                     String::class.java, 
                     Constants.KEY_PLAYER_1_NAME
                 )} wins"
-                val playerOnePrevScore = mSharedPreference.getValue(
+                mSharedPreference.getValue(
                     Int::class.java,
                     Constants.KEY_PLAYER_1_SCORE,
                     0
-                )
-                mSharedPreference.putValue(Constants.KEY_PLAYER_1_SCORE, playerOnePrevScore!! + 1)
-                mBinding.playerOneScore = playerOnePrevScore + 1
+                )?.let {
+                    mSharedPreference.putValue(Constants.KEY_PLAYER_1_SCORE, it + 1)
+                    mBinding.playerOneScore = it + 1
+                }
             }
             getString(R.string.second_player) -> {
                 mBinding.winnersName = if (AppUtils.isTwoPlayerMode(TAG, mSharedPreference)) {
@@ -145,16 +145,14 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
                 } else {
                     "${getString(R.string.hint_ai)} wins"
                 }
-                val playerTwoPrevScore = mSharedPreference.getValue(
+                mSharedPreference.getValue(
                     Int::class.java,
                     Constants.KEY_PLAYER_2_SCORE,
                     0
-                )
-                mSharedPreference.putValue(Constants.KEY_PLAYER_2_SCORE, playerTwoPrevScore!! + 1)
-                mBinding.playerTwoScore = playerTwoPrevScore + 1
-            }
-            else -> {
-                TODO("Something to think of later")
+                )?.let {
+                    mSharedPreference.putValue(Constants.KEY_PLAYER_2_SCORE, it + 1)
+                    mBinding.playerTwoScore = it + 1
+                }
             }
         }
 
@@ -224,8 +222,7 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
 
     private fun navigateUserToHome() {
         mSharedPreference.putValue(Constants.KEY_IS_GAME_SAVED, false)
-        val choosePlayModeActivity = Intent(this, ChoosePlayMode::class.java)
-        startActivity(choosePlayModeActivity)
+        startActivity(Intent(this, ChoosePlayMode::class.java))
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         finish()
     }
@@ -285,35 +282,29 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
 
     private fun drawSavedGame() {
         // Make sure the Board is drawn before you add the saved moves.
-        mBinding.ticTacToe.viewTreeObserver.addOnGlobalLayoutListener(
-            object : ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    mBinding.ticTacToe.viewTreeObserver.removeOnGlobalLayoutListener(this)
+        mSharedPreference.getValue(
+            Boolean::class.java,
+            Constants.KEY_IS_GAME_SAVED,
+            false
+        )?.let { weHaveSavedGame ->
+            Log.i(TAG, "weHaveSavedGame = '$weHaveSavedGame'")
 
-                    mSharedPreference.getValue(
-                        Boolean::class.java,
-                        Constants.KEY_IS_GAME_SAVED,
-                        false
-                    )?.let { weHaveSavedGame ->
-                        if (weHaveSavedGame) {
-                            val gameMoves = mSharedPreference.getValue(
-                                GameMoves::class.java,
-                                Constants.KEY_GAME_MOVES,
-                                GameMoves(arrayListOf())
-                            )?.getGameMoves()
+            if (weHaveSavedGame) {
+                val gameMoves = mSharedPreference.getValue(
+                    GameMoves::class.java,
+                    Constants.KEY_GAME_MOVES,
+                    GameMoves(arrayListOf())
+                )?.getGameMoves()
 
-                            val ticTacToaBoard =  mBinding.ticTacToe
-
-                            Log.i(TAG, "weHaveSavedGame = '$weHaveSavedGame'")
-                            Log.i(TAG, "moves = ${Arrays.deepToString(gameMoves!!.toArray())}")
-
-//                            ticTacToaBoard.setMovesPlayed(gameMoves)
-                            ticTacToaBoard.invalidate()
-                            ticTacToaBoard.aiPlays()
-                        }
-                    }
+                val ticTacToaBoard = mBinding.ticTacToe
+                gameMoves?.let {
+                    Log.i(TAG, "moves = ${Arrays.deepToString(gameMoves.toArray())}")
+                    ticTacToaBoard.setMovesPlayed(gameMoves)
+                    ticTacToaBoard.invalidate() // Draws the board.
+                    ticTacToaBoard.aiPlays()
+                    ticTacToaBoard.checkWinState() // So as to show Dialog if possible.
                 }
-            })
+            }
+        }
     }
-
 }

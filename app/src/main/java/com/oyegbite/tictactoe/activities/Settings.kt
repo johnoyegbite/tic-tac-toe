@@ -27,7 +27,7 @@ class Settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_settings)
         mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.Settings)
+        mSharedPreference.putValue(Constants.KEY_SAVED_CURRENT_ACTIVITY, Constants.Activity.Settings)
 
         mSharedPreference.getValue(
             Int::class.java,
@@ -127,7 +127,7 @@ class Settings : AppCompatActivity() {
         if (updatedBoardDimension!! != prevBoardDimension) {
             notifyThePlayersAboutDataClearing()
         } else {
-            navigateUserToScene()
+            navigateToPreviousActivity()
         }
     }
 
@@ -138,7 +138,7 @@ class Settings : AppCompatActivity() {
                 getString(R.string.yes)
             ) { dialog, _ ->
                 resetBoard()
-                navigateUserToScene()
+                navigateToPreviousActivity()
                 dialog.dismiss()
             }
             .setPositiveButton(
@@ -160,9 +160,22 @@ class Settings : AppCompatActivity() {
         mSharedPreference.putValue(Constants.KEY_GAME_MOVES, GameMoves(arrayListOf()))
     }
 
-    private fun navigateUserToScene() {
-        val scene = Intent(this, Scene::class.java)
-        startActivity(scene)
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    private fun navigateToPreviousActivity() {
+        val previousActivityNumber = mSharedPreference.getValue(
+            Int::class.java,
+            Constants.KEY_SAVED_PREVIOUS_ACTIVITY,
+            Constants.Activity.Scene
+        )
+
+        when(previousActivityNumber) {
+            Constants.Activity.ChoosePlayMode -> {
+                startActivity(Intent(this, ChoosePlayMode::class.java))
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            }
+            Constants.Activity.Scene -> {
+                startActivity(Intent(this, Scene::class.java))
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            }
+        }
     }
 }

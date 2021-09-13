@@ -102,8 +102,10 @@ class TicTacToeBoard(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        mPaint.style = Paint.Style.STROKE
-        mPaint.isAntiAlias = true
+        mPaint.apply {
+            isAntiAlias = true  // flag to ensure your drawing has smooth edges.
+            style = Paint.Style.STROKE
+        }
 
         drawGameBoard(canvas)
         drawMarkers(canvas)
@@ -138,7 +140,7 @@ class TicTacToeBoard(
         ) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                val aiMove = mGameLogic.getAvailableMove()
+                val aiMove = mGameLogic.getAIAvailableMoveRandom()
                 play(aiMove)
             }
         }.start()
@@ -177,25 +179,25 @@ class TicTacToeBoard(
         Log.i(TAG, "move = ${move.contentToString()}")
 
         if (!isGameOver && mGameLogic.addToMoves(move)) {
-            val winState = mGameLogic.getGameWinState(mGameLogic.getMovesPlayed())
-            checkIfGameOverAfterPlay(winState)
+            checkWinState()
             switchPlayer()
             invalidate() // Redraw game board so as to update new draws
         }
     }
 
-    private fun vibrateDevice(vibrateMills: Long) {
-        mTicTacToeDataListener?.vibrateDevice(vibrateMills)
+    fun checkWinState() {
+        val winState = mGameLogic.getGameWinState(mGameLogic.getMovesPlayed())
+        checkGameOver(winState)
     }
 
     /**
      * @param winState which is either "Draw", "Pending", "Player 1", "Player 2"
-     *  @see R.string.draw
-     *  @see R.string.pending
-     *  @see R.string.first_player
-     *  @see R.string.second_player
+     * @see R.string.draw
+     * @see R.string.pending
+     * @see R.string.first_player
+     * @see R.string.second_player
      */
-    private fun checkIfGameOverAfterPlay(winState: String) {
+    private fun checkGameOver(winState: String) {
         Log.i(TAG, "winState = '$winState'")
         if (winState == context.getString(R.string.pending)) {
             vibrateDevice(100L)
@@ -207,6 +209,10 @@ class TicTacToeBoard(
             return
         }
         vibrateDevice(500L) // A player won hence longer vibration
+    }
+
+    private fun vibrateDevice(vibrateMills: Long) {
+        mTicTacToeDataListener?.vibrateDevice(vibrateMills)
     }
 
     private fun switchPlayer() {
@@ -231,8 +237,10 @@ class TicTacToeBoard(
     }
 
     private fun drawGameBoard(canvas: Canvas?) {
-        mPaint.color = mBoardColor
-        mPaint.strokeWidth = mBoardThickness
+        mPaint.apply {
+            color = mBoardColor
+            strokeWidth = mBoardThickness
+        }
         //        a  b
         //     ----------
         //     |  |  |  |
@@ -343,8 +351,10 @@ class TicTacToeBoard(
      * i.e board[row][col]
      */
     private fun drawX(canvas: Canvas?, row: Int, col: Int) {
-        mPaint.color = mXColor
-        mPaint.strokeWidth = mMarkerThickness
+        mPaint.apply {
+            color = mXColor
+            strokeWidth = mMarkerThickness
+        }
 
         canvas?.drawLine( // draw "\"
             (mCellSize * col).toFloat() + mCellPadding,
@@ -363,8 +373,10 @@ class TicTacToeBoard(
     }
 
     private fun drawO(canvas: Canvas?, row: Int, col: Int) {
-        mPaint.color = mOColor
-        mPaint.strokeWidth = mMarkerThickness
+        mPaint.apply {
+            color = mOColor
+            strokeWidth = mMarkerThickness
+        }
 
         // The X coordinate of the left side of the rectangle
         val left = (col * mCellSize) + mCellPadding
@@ -467,7 +479,9 @@ class TicTacToeBoard(
     }
 
     private fun setWinningMarkerStrokeWidthAndColor() {
-        mPaint.strokeWidth = 0.5F * mMarkerThickness
+        mPaint.apply {
+            strokeWidth = 0.5F * mMarkerThickness
+        }
 
         val playerOneSide = mSharedPreference.getValue(
             String::class.java,
@@ -528,14 +542,14 @@ class TicTacToeBoard(
 //            originalBitmapO, (mCellSize - mCellPadding).toInt(), (mCellSize - mCellPadding).toInt(), false
 //        )
 //
-//        canvas?.drawBitmap(originalBitmapO, 0F, 0F, null)
-//        canvas?.drawBitmap(resizedBitmapO, left.toFloat(), top.toFloat(), null)
+//        canvas?.drawBitmap(originalBitmapO, 0F, 0F, mPaint)
+//        canvas?.drawBitmap(resizedBitmapO, left.toFloat(), top.toFloat(), mPaint)
 
 //        canvas?.drawBitmap(
 //            resizedBitmapO,
 //            null,
 //            rectF,
-//            null
+//            mPaint
 //        )
 
 //        originalBitmapO.recycle()

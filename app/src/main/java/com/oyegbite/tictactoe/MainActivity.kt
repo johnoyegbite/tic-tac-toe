@@ -43,47 +43,41 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToScene() {
-        val scene = Intent(this, Scene::class.java)
-        startActivity(scene)
+        startActivity(Intent(this, Scene::class.java))
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     private fun canNavigateToSavedActivity(): Boolean {
         val savedActivityNumber = mSharedPreference.getValue(
             Int::class.java,
-            Constants.KEY_SAVED_ACTIVITY,
+            Constants.KEY_SAVED_CURRENT_ACTIVITY,
             Constants.Activity.MainActivity
         )
 
         when(savedActivityNumber) {
             Constants.Activity.ChoosePlayMode -> {
-                val scene = Intent(this, ChoosePlayMode::class.java)
-                startActivity(scene)
+                startActivity(Intent(this, ChoosePlayMode::class.java))
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 return true
             }
             Constants.Activity.EnterPlayerName -> {
-                val scene = Intent(this, EnterPlayerName::class.java)
-                startActivity(scene)
+                startActivity(Intent(this, EnterPlayerName::class.java))
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 return true
             }
             Constants.Activity.ChooseYourSide -> {
-                val scene = Intent(this, ChooseYourSide::class.java)
-                startActivity(scene)
+                startActivity(Intent(this, ChooseYourSide::class.java))
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 return true
             }
             Constants.Activity.Scene -> {
-                val scene = Intent(this, Scene::class.java)
-                startActivity(scene)
+                startActivity(Intent(this, Scene::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 return true
             }
             Constants.Activity.Settings -> {
-                val scene = Intent(this, Settings::class.java)
-                startActivity(scene)
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                startActivity(Intent(this, Settings::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 return true
             }
         }

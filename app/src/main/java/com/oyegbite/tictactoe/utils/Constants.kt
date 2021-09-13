@@ -37,7 +37,8 @@ class Constants private constructor() {
         const val KEY_GAME_MOVES = "GAME_MOVES"
         const val KEY_IS_GAME_SAVED = "IS_GAME_SAVED"
 
-        const val KEY_SAVED_ACTIVITY = "SAVED_ACTIVITY"
+        const val KEY_SAVED_PREVIOUS_ACTIVITY = "SAVED_PREVIOUS_ACTIVITY"
+        const val KEY_SAVED_CURRENT_ACTIVITY = "SAVED_CURRENT_ACTIVITY"
 
         const val KEY_VIBRATION_ACTIVE = "VIBRATION_ACTIVE"
 

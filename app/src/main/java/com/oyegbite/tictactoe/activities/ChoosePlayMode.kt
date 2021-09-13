@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.oyegbite.tictactoe.MainActivity
 import com.oyegbite.tictactoe.R
 import com.oyegbite.tictactoe.databinding.ActivityChoosePlayModeBinding
 import com.oyegbite.tictactoe.utils.AppUtils
@@ -31,7 +30,7 @@ class ChoosePlayMode : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_choose_play_mode)
         mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.ChoosePlayMode)
+        mSharedPreference.putValue(Constants.KEY_SAVED_CURRENT_ACTIVITY, Constants.Activity.ChoosePlayMode)
 
         setBindings()
     }
@@ -44,22 +43,35 @@ class ChoosePlayMode : AppCompatActivity() {
         mBinding.playFriend.setOnClickListener(View.OnClickListener {
             savePlayMode(Constants.VALUE_PLAY_MODE_FRIEND)
         })
+
+        mBinding.settings.setOnClickListener(View.OnClickListener {
+            navigateToSettingsActivity()
+        })
     }
 
     private fun savePlayMode(playMode: String) {
         Log.i(TAG, "playMode = $playMode")
-        mSharedPreference.putValue(Constants.KEY_PLAY_MODE, playMode)
 
-        val enterPlayerName = Intent(this, EnterPlayerName::class.java)
-        startActivity(enterPlayerName)
+        mSharedPreference.putValue(Constants.KEY_PLAY_MODE, playMode)
+        navigateToNextActivity()
+    }
+
+    private fun navigateToNextActivity() {
+        startActivity(Intent(this, EnterPlayerName::class.java))
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
+    private fun navigateToSettingsActivity() {
+        mSharedPreference.putValue(Constants.KEY_SAVED_PREVIOUS_ACTIVITY, Constants.Activity.ChoosePlayMode)
+        startActivity(Intent(this, Settings::class.java))
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     override fun onBackPressed() {
         if (mIsBackBtnDoubleClicked) {
             super.onBackPressed()
             stopTimer()
-            mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.MainActivity)
+            mSharedPreference.putValue(Constants.KEY_SAVED_CURRENT_ACTIVITY, Constants.Activity.MainActivity)
             finishAffinity()
             return
         }

@@ -27,7 +27,7 @@ class EnterPlayerName : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_enter_player_name)
         mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_ACTIVITY, Constants.Activity.EnterPlayerName)
+        mSharedPreference.putValue(Constants.KEY_SAVED_CURRENT_ACTIVITY, Constants.Activity.EnterPlayerName)
 
         mBinding.isTwoPlayer = AppUtils.isTwoPlayerMode(TAG, mSharedPreference)
         setDefaultPlayerNames()
@@ -37,9 +37,7 @@ class EnterPlayerName : AppCompatActivity() {
     private fun setBindings() {
         mBinding.continueToChooseSide.setOnClickListener(View.OnClickListener {
             if (playerNamesAreSet()) {
-                val chooseYourSide = Intent(this, ChooseYourSide::class.java)
-                startActivity(chooseYourSide)
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                navigateToNextActivity()
             }
         })
     }
@@ -97,7 +95,7 @@ class EnterPlayerName : AppCompatActivity() {
         })
 
         if (AppUtils.isTwoPlayerMode(TAG, mSharedPreference)) {
-            var prevPlayerTwoName: String? = mSharedPreference.getValue(
+            val prevPlayerTwoName: String? = mSharedPreference.getValue(
                 String::class.java,
                 Constants.KEY_PLAYER_2_NAME,
                 getString(R.string.hint_player_2)
@@ -117,8 +115,16 @@ class EnterPlayerName : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val choosePlayMode = Intent(this, ChoosePlayMode::class.java)
-        startActivity(choosePlayMode)
+        navigateToPreviousActivity()
+    }
+
+    private fun navigateToNextActivity() {
+        startActivity(Intent(this, ChooseYourSide::class.java))
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
+    private fun navigateToPreviousActivity() {
+        startActivity(Intent(this, ChoosePlayMode::class.java))
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 }

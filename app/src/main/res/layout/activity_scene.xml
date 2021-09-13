@@ -54,8 +54,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg_white"
             android:layout_centerInParent="true"
+            android:background="@color/bg_white"
             android:gravity="center"
             tools:context=".activities.Scene">
 
@@ -68,7 +68,7 @@
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -288,20 +288,21 @@
             android:layout_marginStart="@dimen/card_margin"
             android:layout_marginEnd="@dimen/card_margin"
             android:layout_marginTop="@dimen/padding_smaller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/border_radius_button"
+            android:layout_height="@dimen/border_radius_button"
             android:background="@color/white"
             android:layout_gravity="center"
-            app:cardCornerRadius="@dimen/padding_bigger"
+            app:cardCornerRadius="52dp"
             app:cardElevation="@dimen/padding_mid">
 
             <ImageButton
                 android:id="@+id/settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/border_radius_button"
+                android:layout_height="@dimen/border_radius_button"
                 android:src="@drawable/ic_settings"
+                android:scaleType="fitXY"
                 android:backgroundTint="@color/white"
-                custom:tint="@color/color_primary" />
+                app:tint="@color/color_primary" />
 
         </com.google.android.material.card.MaterialCardView>
 

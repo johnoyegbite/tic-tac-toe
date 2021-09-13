@@ -5,6 +5,13 @@
         android:toXDelta="0%"
         android:fromYDelta="0%"
         android:toYDelta="0%"
-        android:duration="@integer/anim_half_secs"
+        android:duration="@android:integer/config_shortAnimTime"
         />
+
+    <!--    Fade In -->
+    <alpha
+        android:duration="@android:integer/config_shortAnimTime"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"/>
+
 </set>
