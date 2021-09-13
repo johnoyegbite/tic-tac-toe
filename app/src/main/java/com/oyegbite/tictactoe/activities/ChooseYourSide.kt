@@ -8,6 +8,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.oyegbite.tictactoe.R
 import com.oyegbite.tictactoe.databinding.ActivityChooseYourSideBinding
+import com.oyegbite.tictactoe.models.GameMoves
 import com.oyegbite.tictactoe.utils.AppUtils
 import com.oyegbite.tictactoe.utils.Constants
 import com.oyegbite.tictactoe.utils.SharedPreference
@@ -84,6 +85,7 @@ class ChooseYourSide : AppCompatActivity() {
         mSharedPreference.putValue(Constants.KEY_PLAYER_2_SCORE, 0)
         mSharedPreference.putValue(Constants.KEY_FIRST_PLAYER, getString(R.string.first_player))
         mSharedPreference.putValue(Constants.KEY_IS_PLAYER_ONE_TURN, true)
+        mSharedPreference.putValue(Constants.KEY_GAME_MOVES, GameMoves(arrayListOf()))
     }
 
     override fun onBackPressed() {

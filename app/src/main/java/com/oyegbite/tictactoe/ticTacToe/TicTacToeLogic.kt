@@ -105,12 +105,13 @@ class TicTacToeLogic(context: Context, dimension: Int) {
         mVisitedCells.clear()
         mWinDirection = mContext.getString(R.string.win_direction_none)
         mWinMoveCell = intArrayOf(0, 0)
+        mSharedPreference.putValue(Constants.KEY_GAME_MOVES, GameMoves(arrayListOf()))
     }
 
     /**
      * Add only to [mMoves] if board is not filled and cell is empty
      */
-    fun addToMoves(cell: IntArray): Boolean {
+    fun canAddToMoves(cell: IntArray): Boolean {
         if (mMoves.size >= mBoardDimension * mBoardDimension) return false
 
         val (row, col) = cell

@@ -33,13 +33,19 @@ class TicTacToeBoard(
 
     private var mCountDownTimer: CountDownTimer? = null
     private var mSharedPreference: SharedPreference = SharedPreference(context)
+    private val mPlayVibration: Long = 100L
+    private val mWinVibration: Long = 500L
     private val mXColor: Int
     private val mOColor: Int
-    private var mBoardDimension: Int = 3 // 3 x 3 board
-    private var mBoardWidth: Int = width
     private val mBoardColor: Int
-    private var mBoardThickness: Float = 8F
-    private var mMarkerThickness: Float = 24F
+    private val mDefaultBoardDimension: Int = 3
+    private val mDefaultBoardThickness: Float = 8F
+    private val mDefaultMarkerThickness: Float = 24F
+    private var mBoardWidth: Int = width
+    private var mBoardDimension: Int = mDefaultBoardDimension // 3 x 3 board
+    private val mBoardPadding: Int = 32
+    private var mBoardThickness: Float = mDefaultBoardThickness
+    private var mMarkerThickness: Float = mDefaultMarkerThickness
     private var mCellSize: Int = width / mBoardDimension
     private var mCellPadding: Float = 0.1F * mCellSize
     private val mPaint: Paint = Paint()
@@ -72,22 +78,17 @@ class TicTacToeBoard(
         }
     }
 
-    fun setMovesPlayed(moves: ArrayList<IntArray>) {
-        mGameLogic.setMovesPlayed(moves)
-    }
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-        val spaceAroundBoard = 32
         // Get minimum dimension from the width and height of player's device,
         // and also remove required space.
-        mBoardWidth = measuredHeight.coerceAtMost(measuredWidth) - spaceAroundBoard
+        mBoardWidth = measuredHeight.coerceAtMost(measuredWidth) - mBoardPadding
 
         mSharedPreference.getValue(
             Int::class.java,
             Constants.KEY_BOARD_DIMENSION,
-            3
+            mDefaultBoardDimension
         )?.let {
             mBoardDimension = it
             mGameLogic.updateBoardDimension(mBoardDimension)
@@ -95,6 +96,11 @@ class TicTacToeBoard(
 
         mCellSize = mBoardWidth / mBoardDimension
         mCellPadding = 0.15F * mCellSize
+
+        // 3 x 3 board dimension => 8F board thickness
+        // => 4 x 4 => ((3 * 8) / 4)F board thickness
+        mBoardThickness = (mDefaultBoardDimension * mDefaultBoardThickness) / mBoardDimension
+        mMarkerThickness = (mDefaultBoardDimension * mDefaultMarkerThickness) / mBoardDimension
 
         setMeasuredDimension(mBoardWidth, mBoardWidth) // We need a Square TicTacToa board
     }
@@ -110,6 +116,10 @@ class TicTacToeBoard(
         drawGameBoard(canvas)
         drawMarkers(canvas)
         drawWinningLine(canvas)
+    }
+
+    fun setMovesPlayed(moves: ArrayList<IntArray>) {
+        mGameLogic.setMovesPlayed(moves)
     }
 
     private fun isAITurnToPlay(): Boolean {
@@ -178,7 +188,7 @@ class TicTacToeBoard(
 
         Log.i(TAG, "move = ${move.contentToString()}")
 
-        if (!isGameOver && mGameLogic.addToMoves(move)) {
+        if (!isGameOver && mGameLogic.canAddToMoves(move)) {
             checkWinState()
             switchPlayer()
             invalidate() // Redraw game board so as to update new draws
@@ -200,15 +210,15 @@ class TicTacToeBoard(
     private fun checkGameOver(winState: String) {
         Log.i(TAG, "winState = '$winState'")
         if (winState == context.getString(R.string.pending)) {
-            vibrateDevice(100L)
+            vibrateDevice(mPlayVibration)
             return
         }
         mTicTacToeDataListener?.updateGameOverState(true, winState)
         if (winState == context.getString(R.string.draw)) {
-            vibrateDevice(100L)
+            vibrateDevice(mPlayVibration)
             return
         }
-        vibrateDevice(500L) // A player won hence longer vibration
+        vibrateDevice(mWinVibration) // A player won hence longer vibration
     }
 
     private fun vibrateDevice(vibrateMills: Long) {

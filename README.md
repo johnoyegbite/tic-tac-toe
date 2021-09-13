@@ -1,1 +1,2 @@
-"#Tic Tac Toe game mobile app written in Kotlin" 
+##Tic-Tac-Toe mobile game application written in Kotlin
+### AI and Multiplayer

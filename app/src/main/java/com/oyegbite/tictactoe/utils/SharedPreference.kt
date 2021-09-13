@@ -70,8 +70,8 @@ class SharedPreference(context: Context) {
         return if (res < 0) PUT_FAIL else PUT_SUCCESS
     }
 
-    fun <T> getValue(dataTypeofKey: Class<T>, key: String): T? {
-        return when (dataTypeofKey) {
+    fun <T> getValue(keyClassType: Class<T>, key: String): T? {
+        return when (keyClassType) {
             String::class.java -> {
                 val value = mSharedPreferences.getString(key, "") as T?
                 Log.i(TAG, "getValue() => key: $key, value: '$value'")
@@ -87,7 +87,7 @@ class SharedPreference(context: Context) {
                     if (value!!.isEmpty()) {
                         null
                     } else {
-                        gson.fromJson(value, dataTypeofKey)
+                        gson.fromJson(value, keyClassType)
                     }
                 } catch (e: Exception) {
                     Log.i(
@@ -100,8 +100,8 @@ class SharedPreference(context: Context) {
         }
     }
 
-    fun <T> getValue(dataTypeofKey: Class<T>, key: String, defaultValue: T): T? {
-        return when (dataTypeofKey) {
+    fun <T> getValue(keyClassType: Class<T>, key: String, defaultValue: T): T? {
+        return when (keyClassType) {
             String::class.java -> {
                 val value = mSharedPreferences.getString(key, defaultValue as String) as T?
                 Log.i(TAG, "getValue() => key: $key, value: '$value', default: '$defaultValue'")
@@ -121,7 +121,7 @@ class SharedPreference(context: Context) {
                     if (value!!.isEmpty()) {
                         null
                     } else {
-                        gson.fromJson(value, dataTypeofKey)
+                        gson.fromJson(value, keyClassType)
                     }
                 } catch (e: Exception) {
                     Log.i(

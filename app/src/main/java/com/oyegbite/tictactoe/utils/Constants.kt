@@ -80,21 +80,19 @@ class Constants private constructor() {
 
     object Developer {
         const val FULL_NAME: String = "JOHN OYEGBITE"
+        const val LINKEDIN_ACCOUNT: String = "https://www.linkedin.com/in/john-oyegbite/"
     }
 
     object DateTimeFormat {
         const val OYEGBITE_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
         const val OYEGBITE_DATE_FORMAT_2 = "yyyy-MM-dd HH:mm"
-        const val MY_DATE_FORMAT = "dd/MM/yyyy hh:mm:ss"
-        const val DATE_STAMP_FORMAT = "dd/MM/yyyy"
-        const val FULL_DATE_FORMAT = "EEEE, dd MMMM yyyy hh:mm a"
-        const val SHORT_DATE_FORMAT = "EEEE, MMM d, yyyy"
-        const val DATE_FORMAT = "E, MMM d, yyyy"
-        const val APP_DEFAULT_DATE = "2021-05-28 00:00:00"
-        const val LAST_SYNC_DATE_TIME_FORMAT = "dd/MMMM/yyyy - hh:mm a"
-        const val LAST_SYNC_DATE_FORMAT = "dd/MMMM/yyyy"
+
+        const val DATE_TIME_FORMAT = "dd/MM/yyyy hh:mm:ss"
+        const val DATE_FORMAT = "dd/MM/yyyy"
         const val TIME_FORMAT = "hh:mm a"
-        const val SYNC_SUMMARY_DATE_FORMAT = "dd/MM/yyyy"
+        const val FULL_DATE_TIME_FORMAT = "EEEE, dd MMMM yyyy hh:mm a"
+        const val FULL_DATE_FORMAT = "EEEE, MMM d, yyyy"
+        const val SHORT_DATE_FORMAT = "E, MMM d, yyyy"
     }
 
     object Languages {
@@ -108,21 +106,4 @@ class Constants private constructor() {
         val langTitleToCode: HashMap<String, String> =
             hashMapOf(ENGLISH to ENGLISH_CODE, ENGLISH.lowercase() to ENGLISH_CODE)
     }
-
-    // Database References ###############################################
-    // All the fields in the Database classes are CONSTANTS and SHOULD NOT be modified.
-    object SyncUnitTable {
-        const val TABLE_NAME = "SyncUnit"
-
-        object ColumnNames {
-            const val ID = "id" // PK
-            const val STAFF_ID = "staff_id" // PK
-            const val TABLE_NAME = "table_name"
-            const val TABLE_ENDPOINT_TYPE = "endpoint_type" // Download or Upload
-            const val SYNC_STATE = "sync_state"
-            const val MESSAGE = "message"
-            const val LAST_SYNC_TIME = "last_sync_time"
-        }
-    }
-    // END Database Reference ############################################
 }
