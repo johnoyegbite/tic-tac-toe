@@ -3,8 +3,11 @@ package com.oyegbite.tictactoe.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.oyegbite.tictactoe.R
@@ -13,6 +16,7 @@ import com.oyegbite.tictactoe.models.GameMoves
 import com.oyegbite.tictactoe.utils.AppUtils
 import com.oyegbite.tictactoe.utils.Constants
 import com.oyegbite.tictactoe.utils.SharedPreference
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class Settings : AppCompatActivity() {
     companion object {
@@ -41,6 +45,7 @@ class Settings : AppCompatActivity() {
     private fun setBindings() {
         vibrationBinding()
         boardSizeBinding()
+        difficultyLevelBinding()
     }
 
     private fun vibrationBinding() {
@@ -93,6 +98,66 @@ class Settings : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun difficultyLevelBinding() {
+        val difficultyLevelArray = resources.getStringArray(R.array.difficulty_levels)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.difficulty_levels,
+            android.R.layout.simple_spinner_item
+        ).also { arrayAdapter ->
+            // Populate the Spinner dropdown
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            mBinding.difficultyLevel.adapter = arrayAdapter
+
+            // Set a starting value to show the Player
+            mSharedPreference.getValue(
+                keyClassType = String::class.java,
+                key = Constants.KEY_DIFFICULTY_LEVEL,
+                defaultValue = getString(R.string.random)
+            ).let { level ->
+                val levelIdx = difficultyLevelArray.indexOf(level)
+                mBinding.difficultyLevel.setSelection(levelIdx)
+                Log.i(TAG, "Previous level = $level, Corresponding index = $levelIdx")
+            }
+        }
+
+        mBinding.difficultyLevel.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                // An item was selected.
+                when (parent.getItemAtPosition(pos)) {
+                    getString(R.string.easy) -> {
+                        mSharedPreference.putValue(
+                            Constants.KEY_DIFFICULTY_LEVEL,
+                            getString(R.string.easy)
+                        )
+                    }
+                    getString(R.string.medium) -> {
+                        mSharedPreference.putValue(
+                            Constants.KEY_DIFFICULTY_LEVEL,
+                            getString(R.string.medium)
+                        )
+                    }
+                    getString(R.string.hard) -> {
+                        mSharedPreference.putValue(
+                            Constants.KEY_DIFFICULTY_LEVEL,
+                            getString(R.string.hard)
+                        )
+                    }
+                    else -> {
+                        mSharedPreference.putValue(
+                            Constants.KEY_DIFFICULTY_LEVEL,
+                            getString(R.string.random)
+                        )
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Another interface callback
+            }
+        }
     }
 
     private fun updateBoardSize() {

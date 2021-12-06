@@ -30,7 +30,7 @@ class SharedPreference(context: Context) {
     fun <T> putValue(key: String, value: T): Int {
         when(value) {
             is String -> {
-                Log.i(TAG, "putValue() => key: $key, value: '$value'")
+//                Log.i(TAG, "putValue() => key: $key, value: '$value'")
                 editor.putString(key, value)
             }
             is Int -> {
@@ -73,8 +73,8 @@ class SharedPreference(context: Context) {
     fun <T> getValue(keyClassType: Class<T>, key: String): T? {
         return when (keyClassType) {
             String::class.java -> {
-                val value = mSharedPreferences.getString(key, "") as T?
-                Log.i(TAG, "getValue() => key: $key, value: '$value'")
+                val value = mSharedPreferences.getString(key, "") as? T
+//                Log.i(TAG, "getValue() => key: $key, value: '$value'")
                 value
             }
             Int::class.java -> mSharedPreferences.getInt(key, 0) as T
@@ -104,12 +104,12 @@ class SharedPreference(context: Context) {
         return when (keyClassType) {
             String::class.java -> {
                 val value = mSharedPreferences.getString(key, defaultValue as String) as T?
-                Log.i(TAG, "getValue() => key: $key, value: '$value', default: '$defaultValue'")
+//                Log.i(TAG, "getValue() => key: $key, value: '$value', default: '$defaultValue'")
                 value
             }
             Int::class.java -> {
                 val value = mSharedPreferences.getInt(key, defaultValue as Int) as T
-                Log.i(TAG, "getValue() => key: $key, value: $value, default: $defaultValue")
+//                Log.i(TAG, "getValue() => key: $key, value: $value, default: $defaultValue")
                 value
             }
             Float::class.java -> mSharedPreferences.getFloat(key, defaultValue as Float) as T

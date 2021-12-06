@@ -13,7 +13,8 @@
         android:theme="@style/Theme.TicTacToe">
         <activity
             android:name=".activities.Settings"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.ChooseYourSide"
             android:exported="true"

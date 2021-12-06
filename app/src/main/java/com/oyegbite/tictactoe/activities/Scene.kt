@@ -71,8 +71,9 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
 
         // Set Player1 to "X" or "O"
         mBinding.isPlayerOneX = mSharedPreference.getValue(
-             String::class.java,
-             Constants.KEY_PLAYER_1_SIDE
+            String::class.java,
+            Constants.KEY_PLAYER_1_SIDE,
+            Constants.VALUE_PLAYER_1_SIDE_X
          ) == Constants.VALUE_PLAYER_1_SIDE_X
 
         val isGameOver = mSharedPreference.getValue(

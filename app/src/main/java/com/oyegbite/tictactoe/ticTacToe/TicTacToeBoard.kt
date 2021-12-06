@@ -25,12 +25,6 @@ class TicTacToeBoard(
         private val TAG: String = TicTacToeBoard::class.java.simpleName
     }
 
-    private var mTicTacToeDataListener: TicTacToeDataListener? = null
-
-    fun initListener(ticTacToeDataListener: TicTacToeDataListener) {
-        mTicTacToeDataListener = ticTacToeDataListener
-    }
-
     private var mCountDownTimer: CountDownTimer? = null
     private var mSharedPreference: SharedPreference = SharedPreference(context)
     private val mPlayVibration: Long = 100L
@@ -58,6 +52,12 @@ class TicTacToeBoard(
 
     var mGameLogic: TicTacToeLogic = TicTacToeLogic(context, mBoardDimension)
 
+    private var mTicTacToeDataListener: TicTacToeDataListener? = null
+
+    fun initListener(ticTacToeDataListener: TicTacToeDataListener) {
+        mTicTacToeDataListener = ticTacToeDataListener
+    }
+
     init {
 
         try {
@@ -71,7 +71,7 @@ class TicTacToeBoard(
                 mAttributeArray.getInteger(R.styleable.TicTacToeBoard_oColor, 0)
 
             mBoardDimension =
-                mAttributeArray.getInteger(R.styleable.TicTacToeBoard_boardDimension, 3)
+                mAttributeArray.getInteger(R.styleable.TicTacToeBoard_boardDimension, mDefaultBoardDimension)
 
         } finally {
             mAttributeArray.recycle()
@@ -86,9 +86,9 @@ class TicTacToeBoard(
         mBoardWidth = measuredHeight.coerceAtMost(measuredWidth) - mBoardPadding
 
         mSharedPreference.getValue(
-            Int::class.java,
-            Constants.KEY_BOARD_DIMENSION,
-            mDefaultBoardDimension
+            keyClassType = Int::class.java,
+            key = Constants.KEY_BOARD_DIMENSION,
+            defaultValue = mDefaultBoardDimension
         )?.let {
             mBoardDimension = it
             mGameLogic.updateBoardDimension(mBoardDimension)
@@ -125,9 +125,9 @@ class TicTacToeBoard(
     private fun isAITurnToPlay(): Boolean {
         val withAI = !AppUtils.isTwoPlayerMode(TAG, mSharedPreference)
         val isPlayerOneTurn = mSharedPreference.getValue(
-            Boolean::class.java,
-            Constants.KEY_IS_PLAYER_ONE_TURN,
-            true
+            keyClassType = Boolean::class.java,
+            key = Constants.KEY_IS_PLAYER_ONE_TURN,
+            defaultValue = true
         ) == true
         return withAI && !isPlayerOneTurn
     }
@@ -150,8 +150,8 @@ class TicTacToeBoard(
         ) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                val aiMove = mGameLogic.getAIAvailableMoveRandom()
-                play(aiMove)
+                val aiMove = mGameLogic.findAIBestMoveIfAvailable()
+                play(move = aiMove)
             }
         }.start()
     }
@@ -181,14 +181,14 @@ class TicTacToeBoard(
     private fun play(move: IntArray) {
         // Game can be over when someone wins and board is not filled
         val isGameOver = mSharedPreference.getValue(
-            Boolean::class.java,
-            Constants.KEY_IS_GAME_OVER,
-            false
+            keyClassType = Boolean::class.java,
+            key = Constants.KEY_IS_GAME_OVER,
+            defaultValue = false
         ) == true
 
         Log.i(TAG, "move = ${move.contentToString()}")
 
-        if (!isGameOver && mGameLogic.canAddToMoves(move)) {
+        if (!isGameOver && mGameLogic.canAddToMoves(cell = move)) {
             checkWinState()
             switchPlayer()
             invalidate() // Redraw game board so as to update new draws
@@ -196,7 +196,7 @@ class TicTacToeBoard(
     }
 
     fun checkWinState() {
-        val winState = mGameLogic.getGameWinState(mGameLogic.getMovesPlayed())
+        val winState = mGameLogic.getGameWinState(moves = mGameLogic.getMovesPlayed())
         checkGameOver(winState)
     }
 
@@ -210,19 +210,19 @@ class TicTacToeBoard(
     private fun checkGameOver(winState: String) {
         Log.i(TAG, "winState = '$winState'")
         if (winState == context.getString(R.string.pending)) {
-            vibrateDevice(mPlayVibration)
+            vibrateDevice(vibrateMills = mPlayVibration)
             return
         }
-        mTicTacToeDataListener?.updateGameOverState(true, winState)
+        mTicTacToeDataListener?.updateGameOverState(isGameOver = true, winnerSideOrDraw = winState)
         if (winState == context.getString(R.string.draw)) {
-            vibrateDevice(mPlayVibration)
+            vibrateDevice(vibrateMills = mPlayVibration)
             return
         }
-        vibrateDevice(mWinVibration) // A player won hence longer vibration
+        vibrateDevice(vibrateMills = mWinVibration) // A player won hence longer vibration
     }
 
     private fun vibrateDevice(vibrateMills: Long) {
-        mTicTacToeDataListener?.vibrateDevice(vibrateMills)
+        mTicTacToeDataListener?.vibrateDevice(vibrationMills = vibrateMills)
     }
 
     private fun switchPlayer() {
@@ -234,14 +234,14 @@ class TicTacToeBoard(
         invalidate()
 
         val isPlayerOneTurn = mSharedPreference.getValue(
-            Boolean::class.java,
-            Constants.KEY_IS_PLAYER_ONE_TURN,
-            true
+            keyClassType = Boolean::class.java,
+            key = Constants.KEY_IS_PLAYER_ONE_TURN,
+            defaultValue = true
         ) == true
         if (isPlayerOneTurn) {
-            mGameLogic.updateWhoPlaysFirst(context.getString(R.string.first_player))
+            mGameLogic.updateWhoPlaysFirst(firstPlayer = context.getString(R.string.first_player))
         } else {
-            mGameLogic.updateWhoPlaysFirst(context.getString(R.string.second_player))
+            mGameLogic.updateWhoPlaysFirst(firstPlayer = context.getString(R.string.second_player))
             aiPlays() // AI would play if user is playing with AI
         }
     }
@@ -284,17 +284,17 @@ class TicTacToeBoard(
 
     private fun drawMarkers(canvas: Canvas?) {
         val playerOneSide = mSharedPreference.getValue(
-            String::class.java,
-            Constants.KEY_PLAYER_1_SIDE,
-            Constants.VALUE_PLAYER_1_SIDE_X
+            keyClassType = String::class.java,
+            key = Constants.KEY_PLAYER_1_SIDE,
+            defaultValue = Constants.VALUE_PLAYER_1_SIDE_X
         )
 
         Log.i(TAG, "playerOneSide = '$playerOneSide'")
 
         val firstPlayer = mSharedPreference.getValue(
-            String::class.java,
-            Constants.KEY_FIRST_PLAYER,
-            context.getString(R.string.first_player)
+            keyClassType = String::class.java,
+            key = Constants.KEY_FIRST_PLAYER,
+            defaultValue = context.getString(R.string.first_player)
         )
 
         val gameMoves = mGameLogic.getMovesPlayed()
@@ -302,9 +302,9 @@ class TicTacToeBoard(
             val (row, col) = gameMoves[i]
 
             if (firstPlayer == context.getString(R.string.first_player)) {
-                drawFirstPlayerMarker(canvas, row, col, i, playerOneSide!!)
+                drawFirstPlayerMarker(canvas, row, col, moveIdx = i, playerOneSide!!)
             } else {
-                drawSecondPlayerMarker(canvas, row, col, i, playerOneSide!!)
+                drawSecondPlayerMarker(canvas, row, col, moveIdx = i, playerOneSide!!)
             }
         }
     }
@@ -411,14 +411,14 @@ class TicTacToeBoard(
      */
     private fun drawWinningLine(canvas: Canvas?) {
         val firstPlayer = mSharedPreference.getValue(
-            String::class.java,
-            Constants.KEY_FIRST_PLAYER,
-            context.getString(R.string.first_player)
+            keyClassType = String::class.java,
+            key = Constants.KEY_FIRST_PLAYER,
+            defaultValue = context.getString(R.string.first_player)
         )
-        mGameLogic.updateWhoPlaysFirst(firstPlayer!!)
+        mGameLogic.updateWhoPlaysFirst(firstPlayer = firstPlayer!!)
         // You have to set who plays first above [mGameLogic.updateWhoPlaysFirst(firstPlayer!!)]
         // before you can call the [mGameLogic.getGameWinState(...)] below.
-        val winState = mGameLogic.getGameWinState(mGameLogic.getMovesPlayed())
+        val winState = mGameLogic.getGameWinState(moves = mGameLogic.getMovesPlayed())
         if (winState == context.getString(R.string.pending)
             || winState == context.getString(R.string.draw)) {
             return
@@ -494,14 +494,14 @@ class TicTacToeBoard(
         }
 
         val playerOneSide = mSharedPreference.getValue(
-            String::class.java,
-            Constants.KEY_PLAYER_1_SIDE,
-            Constants.VALUE_PLAYER_1_SIDE_X
+            keyClassType = String::class.java,
+            key = Constants.KEY_PLAYER_1_SIDE,
+            defaultValue = Constants.VALUE_PLAYER_1_SIDE_X
         )
         val isPlayerOneTurn = mSharedPreference.getValue(
-            Boolean::class.java,
-            Constants.KEY_IS_PLAYER_ONE_TURN,
-            true
+            keyClassType = Boolean::class.java,
+            key = Constants.KEY_IS_PLAYER_ONE_TURN,
+            defaultValue = true
         ) == true
 
         // Choose appropriate color for player
@@ -527,7 +527,7 @@ class TicTacToeBoard(
         }
     }
 
-    private fun drawOImage() { // Not working yet
+    private fun drawOImage(canvas: Canvas?) { // Not working yet
 //        val originalBitmapO = BitmapFactory.decodeResource(resources,
 //            R.drawable.ic_baseline_gps_not_fixed_24
 //        )

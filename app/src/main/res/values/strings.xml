@@ -11,7 +11,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="data_would_be_cleared">
-        Board dimension has been modified and game would be reset.\nDo you want to continue?
+        Board dimension has been modified and game would be reset.\n\nDo you want to continue?
     </string>
 
     <string name="choose_play_mode">Choose your play mode</string>
@@ -37,8 +37,9 @@
     <string name="touch_to_exit">Touch again to exit</string>
     <string name="choose_another_name">Name "AI" is reserved for computer</string>
 
-    <string name="first_player">@string/hint_player_1</string> <!-- Denotes first player -->
-    <string name="second_player">@string/hint_player_2</string> <!-- Denotes second player -->
+    <string name="first_player">P1</string> <!-- Denotes first player -->
+    <string name="second_player">P2</string> <!-- Denotes second player -->
+    <string name="empty">_</string>
     <string name="draw">Draw</string>
     <string name="pending">Pending</string>
 
@@ -50,5 +51,10 @@
 
     <string name="vibration">Vibration</string>
     <string name="board_dimension">Board dimension</string>
+    <string name="difficulty_level">Difficulty level</string>
+    <string name="random">Random</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
 
 </resources>
