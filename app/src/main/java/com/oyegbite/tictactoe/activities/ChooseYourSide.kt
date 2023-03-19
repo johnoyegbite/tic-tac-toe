@@ -47,7 +47,7 @@ class ChooseYourSide : AppCompatActivity() {
                 mSharedPreference.putValue(Constants.KEY_PLAYER_1_SIDE, Constants.VALUE_PLAYER_1_SIDE_O)
 
                 val isXChecked = mBinding.xChoose.isChecked
-                Log.i(TAG, "X checked was $isXChecked")
+                Log.i(TAG, "X checked is $isXChecked")
                 if (isXChecked) { // Remove "X" from chosen
                     mBinding.xChoose.isChecked = false
                 }
