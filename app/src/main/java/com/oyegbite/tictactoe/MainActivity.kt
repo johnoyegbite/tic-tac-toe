@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "MainActivity started.")
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+
         mSharedPreference = SharedPreference(this)
 
         val weHaveGameSaved = mSharedPreference.getValue(
@@ -33,16 +35,16 @@ class MainActivity : AppCompatActivity() {
         ) == true
 
         if (weHaveGameSaved) {
+            Log.i(TAG, "Game saved detected!")
             navigateToScene()
             finish()
-        }
-
-        if (!canNavigateToSavedActivity()) {
-            startCountDownTimer()
+        } else if (!canNavigateToSavedActivity()) {
+            navigateToChoosePlayModeActivity()
         }
     }
 
     private fun navigateToScene() {
+        Log.i(TAG, "Opening Scene activity...")
         startActivity(Intent(this, Scene::class.java))
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
@@ -56,26 +58,31 @@ class MainActivity : AppCompatActivity() {
 
         when(savedActivityNumber) {
             Constants.Activity.ChoosePlayMode -> {
+                Log.i(TAG, "Opening ChoosePlayMode activity...")
                 startActivity(Intent(this, ChoosePlayMode::class.java))
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 return true
             }
             Constants.Activity.EnterPlayerName -> {
+                Log.i(TAG, "Opening EnterPlayerName activity...")
                 startActivity(Intent(this, EnterPlayerName::class.java))
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 return true
             }
             Constants.Activity.ChooseYourSide -> {
+                Log.i(TAG, "Opening ChooseYourSide activity...")
                 startActivity(Intent(this, ChooseYourSide::class.java))
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 return true
             }
             Constants.Activity.Scene -> {
+                Log.i(TAG, "Opening Scene activity...")
                 startActivity(Intent(this, Scene::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 return true
             }
             Constants.Activity.Settings -> {
+                Log.i(TAG, "Opening Settings activity...")
                 startActivity(Intent(this, Settings::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 return true
@@ -84,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    private fun startCountDownTimer() {
+    private fun navigateToChoosePlayModeActivity() {
         val choosePlayModeActivity = Intent(this, ChoosePlayMode::class.java)
         val countDownInterval: Long = 500
         val stopInterval: Long = 1000
@@ -104,6 +111,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             override fun onFinish() {
+                Log.i(TAG, "Opening ChoosePlayMode activity...")
                 startActivity(choosePlayModeActivity)
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             }

@@ -3,43 +3,6 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <import type="android.view.View" />
-
-        <variable
-            name="playerOneName"
-            type="String" />
-
-        <variable
-            name="playerTwoName"
-            type="String" />
-
-        <variable
-            name="playerOneScore"
-            type="Integer" />
-
-        <variable
-            name="playerTwoScore"
-            type="Integer" />
-
-        <variable
-            name="isPlayerOneX"
-            type="Boolean" />
-
-        <variable
-            name="isPlayerOneTurn"
-            type="Boolean" />
-
-        <variable
-            name="gameOver"
-            type="Boolean" />
-
-        <variable
-            name="winnersName"
-            type="String" />
-
-    </data>
-
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -59,164 +22,8 @@
             android:gravity="center"
             tools:context=".activities.Scene">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/player_logo"
-                        android:layout_height="@dimen/player_logo"
-                        android:src="@{isPlayerOneTurn ? (isPlayerOneX ? @drawable/x : @drawable/o2) : (isPlayerOneX ? @drawable/o2 : @drawable/x)}"
-                        tools:src="@drawable/x"
-                        android:alpha="0.5"
-                        />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/turn"
-                        android:textColor="@color/text_2"
-                        android:textSize="@dimen/text_size_small"
-                        android:gravity="center"
-                        tools:text="turn"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{playerOneName}"
-                            android:textColor="@color/text_2"
-                            android:textSize="@dimen/text_size_mid"
-                            android:gravity="center"
-                            tools:text="Oyegbite"
-                            />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/player_logo"
-                            android:layout_height="@dimen/player_logo"
-                            android:src="@{isPlayerOneX ? @drawable/x : @drawable/o2}"
-                            tools:src="@drawable/x"
-                            />
-
-                    </LinearLayout>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_marginStart="@dimen/card_margin"
-                        android:layout_marginEnd="@dimen/card_margin"
-                        android:layout_marginTop="@dimen/padding_smallest"
-                        android:layout_marginBottom="@dimen/padding_smallest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/bg_white"
-                        android:layout_gravity="center"
-                        app:cardCornerRadius="@dimen/padding_bigger"
-                        app:cardElevation="@dimen/padding_mid">
-
-                        <LinearLayout
-                            android:background="@color/white"
-                            android:paddingTop="@dimen/padding_smaller"
-                            android:paddingBottom="@dimen/padding_smaller"
-                            android:paddingLeft="@dimen/padding_small"
-                            android:paddingRight="@dimen/padding_small"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <LinearLayout
-                                android:gravity="center"
-                                android:layout_gravity="center_horizontal"
-                                android:orientation="horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{`` + playerOneScore}"
-                                    android:textColor="@color/text_2"
-                                    android:textSize="@dimen/text_size_big"
-                                    android:gravity="center"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="@dimen/margin_small"
-                                    android:layout_marginRight="@dimen/margin_small"
-                                    tools:text="4"
-                                    />
-
-                                <View
-                                    android:layout_width="2dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/text_hint"
-                                    />
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{`` + playerTwoScore}"
-                                    android:textColor="@color/text_2"
-                                    android:textSize="@dimen/text_size_big"
-                                    android:gravity="center"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="@dimen/margin_small"
-                                    android:layout_marginRight="@dimen/margin_small"
-                                    tools:text="10"
-                                    />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <LinearLayout
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{playerTwoName}"
-                            android:textColor="@color/text_2"
-                            android:textSize="@dimen/text_size_mid"
-                            android:gravity="center"
-                            tools:text="John"
-                            />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/player_logo"
-                            android:layout_height="@dimen/player_logo"
-                            android:src="@{isPlayerOneX ? @drawable/o2 : @drawable/x}"
-                            tools:src="@drawable/o2"
-                            />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
+            <include layout="@layout/scene_score_board"
+                android:id="@+id/scene_score_board"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_marginStart="@dimen/card_margin_left"
@@ -251,60 +58,23 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/game_over_board"
-                android:layout_marginStart="@dimen/card_margin"
-                android:layout_marginEnd="@dimen/card_margin"
-                android:layout_marginTop="@dimen/padding_smaller"
-                android:layout_marginBottom="@dimen/padding_smallest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:layout_gravity="center"
-                android:alpha="@{gameOver ? 1F : 0F}"
-                app:cardCornerRadius="@dimen/padding_bigger"
-                app:cardElevation="@dimen/padding_mid">
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{winnersName}"
-                    android:textColor="@color/text_2"
-                    android:textSize="@dimen/text_size_big"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@color/white"
-                    tools:text="AI wins"
-                    />
-
-            </com.google.android.material.card.MaterialCardView>
+            <include
+                layout="@layout/game_over_board"
+                android:id="@+id/game_over_board"/>
 
         </LinearLayout>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+        <include
+            layout="@layout/button_settings"
+            android:id="@+id/settings_layout"
+            android:layout_width="@dimen/border_radius_button"
+            android:layout_height="@dimen/border_radius_button"
             android:layout_marginBottom="@dimen/margin_mid"
             android:layout_marginStart="@dimen/card_margin"
             android:layout_marginEnd="@dimen/card_margin"
             android:layout_marginTop="@dimen/padding_smaller"
-            android:layout_width="@dimen/border_radius_button"
-            android:layout_height="@dimen/border_radius_button"
-            android:background="@color/white"
-            android:layout_gravity="center"
-            app:cardCornerRadius="52dp"
-            app:cardElevation="@dimen/padding_mid">
-
-            <ImageButton
-                android:id="@+id/settings"
-                android:layout_width="@dimen/border_radius_button"
-                android:layout_height="@dimen/border_radius_button"
-                android:src="@drawable/ic_settings"
-                android:scaleType="fitXY"
-                android:backgroundTint="@color/white"
-                app:tint="@color/color_primary" />
-
-        </com.google.android.material.card.MaterialCardView>
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 

@@ -11,7 +11,6 @@ import androidx.appcompat.app.AlertDialog
 class AppUtils private constructor(){
 
     companion object {
-
         fun showToast(
             context: Context,
             message: String,
@@ -51,6 +50,5 @@ class AppUtils private constructor(){
             window?.attributes = wlp
             window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         }
-
     }
 }

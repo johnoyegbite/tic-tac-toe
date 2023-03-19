@@ -7,7 +7,6 @@
         <variable
             name="isTwoPlayer"
             type="Boolean" />
-
     </data>
 
     <RelativeLayout
@@ -97,7 +96,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/continue_to_choose_side"
+            android:id="@+id/choose_side"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"

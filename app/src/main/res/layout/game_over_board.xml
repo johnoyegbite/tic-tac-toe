@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="isGameOver"
+            type="Boolean" />
+
+        <variable
+            name="winnersName"
+            type="String" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/game_over"
+        android:layout_marginStart="@dimen/card_margin"
+        android:layout_marginEnd="@dimen/card_margin"
+        android:layout_marginTop="@dimen/padding_smaller"
+        android:layout_marginBottom="@dimen/padding_smallest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_gravity="center"
+        android:alpha="@{isGameOver ? 1F : 0F}"
+        app:cardCornerRadius="@dimen/padding_bigger"
+        app:cardElevation="@dimen/padding_mid">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{winnersName}"
+            android:textColor="@color/text_2"
+            android:textSize="@dimen/text_size_big"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            tools:text="AI wins"
+            />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

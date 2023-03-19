@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="isSubtractActive"
+            type="Boolean" />
+
+        <variable
+            name="isAddActive"
+            type="Boolean" />
+
+        <variable
+            name="boardDimen"
+            type="Integer" />
+    </data>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@drawable/border_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_bigger"
+            android:layout_marginBottom="@dimen/margin_bigger"
+            android:layout_marginEnd="@dimen/margin_mid"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginLeft="@dimen/margin_bigger"
+                android:layout_marginRight="@dimen/margin_bigger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_select_dimension"
+                app:tint="@color/text" />
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_mid"
+                    android:gravity="center_vertical"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/board_dimension"/>
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/subtract"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_subtract"
+                        android:paddingLeft="@dimen/padding_smallest"
+                        android:paddingRight="@dimen/padding_smallest"
+                        android:clickable="@{isSubtractActive}"
+                        android:tint="@{isSubtractActive ? @color/color_primary_dark : @color/disabled_text_dim }"
+                        tools:tint="@color/disabled_text_dim"
+                        />
+
+                    <TextView
+                        android:textSize="@dimen/text_size_mid"
+                        android:layout_marginLeft="@dimen/margin_mid"
+                        android:layout_marginRight="@dimen/margin_mid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{boardDimen + ``}"
+                        tools:text="3"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_add"
+                        android:paddingLeft="@dimen/padding_smallest"
+                        android:paddingRight="@dimen/padding_smallest"
+                        android:clickable="@{isAddActive}"
+                        android:tint="@{isAddActive ? @color/color_primary_dark : @color/disabled_text_dim }"
+                        tools:tint="@color/color_primary_dark"
+                        />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- TODO: Add AI difficulty -->
+
+    </LinearLayout>
+</layout>

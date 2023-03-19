@@ -47,30 +47,30 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
 
     private fun setStartingFields() {
         // Set Player1 and Player2 names
-        mBinding.playerOneName = mSharedPreference.getValue(
+        mBinding.sceneScoreBoard.playerOneName = mSharedPreference.getValue(
             String::class.java,
             Constants.KEY_PLAYER_1_NAME
         )
-        mBinding.playerTwoName = if (AppUtils.isTwoPlayerMode(TAG, mSharedPreference)) {
+        mBinding.sceneScoreBoard.playerTwoName = if (AppUtils.isTwoPlayerMode(TAG, mSharedPreference)) {
             mSharedPreference.getValue(String::class.java, Constants.KEY_PLAYER_2_NAME)
         } else {
             getString(R.string.hint_ai)
         }
 
         // Set Player1 and Player2 scores
-        mBinding.playerOneScore = mSharedPreference.getValue(
+        mBinding.sceneScoreBoard.playerOneScore = mSharedPreference.getValue(
             Int::class.java,
             Constants.KEY_PLAYER_1_SCORE,
             0
         )
-        mBinding.playerTwoScore = mSharedPreference.getValue(
+        mBinding.sceneScoreBoard.playerTwoScore = mSharedPreference.getValue(
             Int::class.java,
             Constants.KEY_PLAYER_2_SCORE,
             0
         )
 
         // Set Player1 to "X" or "O"
-        mBinding.isPlayerOneX = mSharedPreference.getValue(
+        mBinding.sceneScoreBoard.isPlayerOneX = mSharedPreference.getValue(
             String::class.java,
             Constants.KEY_PLAYER_1_SIDE,
             Constants.VALUE_PLAYER_1_SIDE_X
@@ -82,10 +82,10 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
             false
         )
 
-        mBinding.gameOver = isGameOver
+        mBinding.gameOverBoard.isGameOver = isGameOver
         shouldCancelCurrDialog = !isGameOver!!
 
-        mBinding.isPlayerOneTurn = mSharedPreference.getValue(
+        mBinding.sceneScoreBoard.isPlayerOneTurn = mSharedPreference.getValue(
             Boolean::class.java,
             Constants.KEY_IS_PLAYER_ONE_TURN,
             true
@@ -94,7 +94,7 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
     }
 
     private fun setBindings() {
-        mBinding.settings.setOnClickListener(View.OnClickListener {
+        mBinding.settingsLayout.settings.setOnClickListener(View.OnClickListener {
             mSharedPreference.putValue(Constants.KEY_SAVED_PREVIOUS_ACTIVITY, Constants.Activity.Scene)
             startActivity(Intent(this, Settings::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -113,21 +113,21 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
         Log.i(TAG, "isPlayerOneTurn = $nextTurn")
 
         mSharedPreference.putValue(Constants.KEY_IS_PLAYER_ONE_TURN, nextTurn)
-        mBinding.isPlayerOneTurn = nextTurn
+        mBinding.sceneScoreBoard.isPlayerOneTurn = nextTurn
     }
 
     override fun updateGameOverState(isGameOver: Boolean, winnerSideOrDraw: String) {
-        mBinding.gameOver = isGameOver
+        mBinding.gameOverBoard.isGameOver = isGameOver
         fadeGameOverBoardIn()
         showContinueOrResetPopUp()
 
         Log.i(TAG, "winnerSideOrDraw = $winnerSideOrDraw")
         when(winnerSideOrDraw) {
             getString(R.string.draw) -> {
-                mBinding.winnersName = getString(R.string.draw)
+                mBinding.gameOverBoard.winnersName = getString(R.string.draw)
             }
             getString(R.string.first_player) -> {
-                mBinding.winnersName = "${mSharedPreference.getValue(
+                mBinding.gameOverBoard.winnersName = "${mSharedPreference.getValue(
                     String::class.java, 
                     Constants.KEY_PLAYER_1_NAME
                 )} wins"
@@ -137,11 +137,11 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
                     0
                 )?.let {
                     mSharedPreference.putValue(Constants.KEY_PLAYER_1_SCORE, it + 1)
-                    mBinding.playerOneScore = it + 1
+                    mBinding.sceneScoreBoard.playerOneScore = it + 1
                 }
             }
             getString(R.string.second_player) -> {
-                mBinding.winnersName = if (AppUtils.isTwoPlayerMode(TAG, mSharedPreference)) {
+                mBinding.gameOverBoard.winnersName = if (AppUtils.isTwoPlayerMode(TAG, mSharedPreference)) {
                     "${mSharedPreference.getValue(String::class.java, Constants.KEY_PLAYER_2_NAME)} wins"
                 } else {
                     "${getString(R.string.hint_ai)} wins"
@@ -152,7 +152,7 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
                     0
                 )?.let {
                     mSharedPreference.putValue(Constants.KEY_PLAYER_2_SCORE, it + 1)
-                    mBinding.playerTwoScore = it + 1
+                    mBinding.sceneScoreBoard.playerTwoScore = it + 1
                 }
             }
         }
@@ -230,24 +230,24 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
 
     private fun continuePlay() {
         mSharedPreference.putValue(Constants.KEY_IS_GAME_OVER, false)
-        mBinding.gameOver = false
+        mBinding.gameOverBoard.isGameOver = false
         mBinding.ticTacToe.clear()
     }
 
     private fun resetGameBoard() {
         mSharedPreference.putValue(Constants.KEY_IS_GAME_OVER, false)
-        mBinding.gameOver = false
+        mBinding.gameOverBoard.isGameOver = false
         mSharedPreference.putValue(Constants.KEY_PLAYER_1_SCORE, 0)
-        mBinding.playerOneScore = 0
+        mBinding.sceneScoreBoard.playerOneScore = 0
         mSharedPreference.putValue(Constants.KEY_PLAYER_2_SCORE, 0)
-        mBinding.playerTwoScore = 0
+        mBinding.sceneScoreBoard.playerTwoScore = 0
         mBinding.ticTacToe.clear()
     }
 
     private fun fadeGameOverBoardIn() {
         val fadeInAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        mBinding.gameOverBoard.alpha = 1F
-        mBinding.gameOverBoard.startAnimation(fadeInAnim)
+        mBinding.gameOverBoard.gameOver.alpha = 1F
+        mBinding.gameOverBoard.gameOver.startAnimation(fadeInAnim)
     }
 
     override fun onBackPressed() {

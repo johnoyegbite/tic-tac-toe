@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.textfield.TextInputEditText
 import com.oyegbite.tictactoe.R
 import com.oyegbite.tictactoe.databinding.ActivityEnterPlayerNameBinding
 import com.oyegbite.tictactoe.utils.AppUtils
@@ -25,40 +26,42 @@ class EnterPlayerName : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "EnterPlayerName activity.")
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_enter_player_name)
-        mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_CURRENT_ACTIVITY, Constants.Activity.EnterPlayerName)
 
-        mBinding.isTwoPlayer = AppUtils.isTwoPlayerMode(TAG, mSharedPreference)
+        mSharedPreference = SharedPreference(this)
+        mSharedPreference.putValue(
+            Constants.KEY_SAVED_CURRENT_ACTIVITY,
+            Constants.Activity.EnterPlayerName
+        )
+
+        setBindingsAndListeners()
         setDefaultPlayerNames()
-        setBindings()
     }
 
-    private fun setBindings() {
-        mBinding.continueToChooseSide.setOnClickListener(View.OnClickListener {
+    private fun setBindingsAndListeners() {
+        mBinding.isTwoPlayer = AppUtils.isTwoPlayerMode(TAG, mSharedPreference)
+        mBinding.chooseSide.setOnClickListener(View.OnClickListener {
             if (playerNamesAreSet()) {
-                navigateToNextActivity()
+                navigateToChooseYourSideActivity()
             }
         })
     }
 
     private fun playerNamesAreSet(): Boolean {
-        var namesAreSet: Boolean = true
-
         val playerOneName = mBinding.playerOneName.text.toString().trim()
-        namesAreSet = isPlayerSet(playerOneName, Constants.KEY_PLAYER_1_NAME)
+        var namesAreSet = isPlayerNameSet(playerOneName, Constants.KEY_PLAYER_1_NAME)
 
         if (AppUtils.isTwoPlayerMode(TAG, mSharedPreference)) {
             val playerTwoName = mBinding.playerTwoName.text.toString().trim()
-            namesAreSet = namesAreSet && isPlayerSet(playerTwoName, Constants.KEY_PLAYER_2_NAME)
+            namesAreSet = namesAreSet && isPlayerNameSet(playerTwoName, Constants.KEY_PLAYER_2_NAME)
         }
 
         return namesAreSet
     }
 
-    private fun isPlayerSet(playerName: String, playerKey: String): Boolean {
+    private fun isPlayerNameSet(playerName: String, playerKey: String): Boolean {
         if (!TextUtils.isEmpty(playerName)) {
-            //TODO User should not be able to enter name "AI" since we are using that for our computer name.
             if (playerName.lowercase() != getString(R.string.hint_ai).lowercase()) {
                 mSharedPreference.putValue(playerKey, playerName)
             } else {
@@ -77,54 +80,59 @@ class EnterPlayerName : AppCompatActivity() {
                 mSharedPreference.putValue(playerKey, getString(R.string.hint_player_2))
             }
         }
-
         return true
     }
 
     private fun setDefaultPlayerNames() {
-        val prevPlayerOneName = mSharedPreference.getValue(
-            String::class.java,
+        setDefaultPlayerName(
+            mBinding.playerOneName,
             Constants.KEY_PLAYER_1_NAME,
-            getString(R.string.hint_player_1)
+            R.string.hint_player_1
         )
-        mSharedPreference.putValue(Constants.KEY_PLAYER_1_NAME, prevPlayerOneName)
-        mBinding.playerOneName.setText(if (prevPlayerOneName == getString(R.string.hint_player_1)) {
-            ""
-        } else {
-            prevPlayerOneName
-        })
 
         if (AppUtils.isTwoPlayerMode(TAG, mSharedPreference)) {
-            val prevPlayerTwoName: String? = mSharedPreference.getValue(
-                String::class.java,
-                Constants.KEY_PLAYER_2_NAME,
-                getString(R.string.hint_player_2)
-            )
-
-            Log.i(TAG, "setDefaultPlayerNames() => prevPlayerTwoName: $prevPlayerTwoName")
             Log.i(TAG, "setDefaultPlayerNames() => Two Player Mode")
-
-            mSharedPreference.putValue(Constants.KEY_PLAYER_2_NAME, prevPlayerTwoName)
-            mBinding.playerTwoName.setText(if (prevPlayerTwoName == getString(R.string.hint_player_2)) {
-                ""
-            } else {
-                prevPlayerTwoName
-            })
-
+            setDefaultPlayerName(
+                mBinding.playerTwoName,
+                Constants.KEY_PLAYER_2_NAME,
+                R.string.hint_player_2
+            )
         }
     }
 
-    override fun onBackPressed() {
-        navigateToPreviousActivity()
+    private fun setDefaultPlayerName(
+        playerNameInput: TextInputEditText,
+        prevPlayerNameKey: String,
+        defaultPlayerNameRString: Int
+    ) {
+        val prevPlayerName: String? = mSharedPreference.getValue(
+            String::class.java,
+            prevPlayerNameKey,
+            getString(defaultPlayerNameRString)
+        )
+        Log.i(TAG, "setDefaultPlayerName() => prevPlayerName: $prevPlayerName")
+
+        mSharedPreference.putValue(prevPlayerNameKey, prevPlayerName)
+        playerNameInput.setText(
+            if (prevPlayerName == getString(defaultPlayerNameRString)) {
+                ""
+            } else {
+                prevPlayerName
+            }
+        )
     }
 
-    private fun navigateToNextActivity() {
+    private fun navigateToChooseYourSideActivity() {
         startActivity(Intent(this, ChooseYourSide::class.java))
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 
-    private fun navigateToPreviousActivity() {
+    private fun navigateToChoosePlayModeActivity() {
         startActivity(Intent(this, ChoosePlayMode::class.java))
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
+    override fun onBackPressed() {
+        navigateToChoosePlayModeActivity()
     }
 }

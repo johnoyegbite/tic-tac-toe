@@ -10,7 +10,7 @@
     <string name="confirm_exit">Do you want to exit?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="data_would_be_cleared">
+    <string name="game_reset_notification">
         Board dimension has been modified and game would be reset.\n\nDo you want to continue?
     </string>
 
@@ -56,5 +56,7 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
+
+    <string name="settings_content_desc">Setting</string>
 
 </resources>

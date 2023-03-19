@@ -28,41 +28,49 @@ class ChoosePlayMode : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "ChoosePlayMode activity.")
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_choose_play_mode)
-        mSharedPreference = SharedPreference(this)
-        mSharedPreference.putValue(Constants.KEY_SAVED_CURRENT_ACTIVITY, Constants.Activity.ChoosePlayMode)
 
-        setBindings()
+        mSharedPreference = SharedPreference(this)
+        mSharedPreference.putValue(
+            Constants.KEY_SAVED_CURRENT_ACTIVITY,
+            Constants.Activity.ChoosePlayMode
+        )
+
+        setupListeners()
     }
 
-    private fun setBindings() {
+    private fun setupListeners() {
+        Log.i(TAG, "Setting up listeners.")
         mBinding.playAi.setOnClickListener(View.OnClickListener {
             savePlayMode(Constants.VALUE_PLAY_MODE_AI)
         })
 
-        mBinding.playFriend.setOnClickListener(View.OnClickListener {
+        mBinding.playFriend.setOnClickListener {
             savePlayMode(Constants.VALUE_PLAY_MODE_FRIEND)
-        })
+        }
 
-        mBinding.settings.setOnClickListener(View.OnClickListener {
+        mBinding.settingsLayout.settings.setOnClickListener {
             navigateToSettingsActivity()
-        })
+        }
     }
 
     private fun savePlayMode(playMode: String) {
-        Log.i(TAG, "playMode = $playMode")
-
+        Log.i(TAG, "playMode: $playMode")
         mSharedPreference.putValue(Constants.KEY_PLAY_MODE, playMode)
-        navigateToNextActivity()
+        navigateToEnterPlayerNameActivity()
     }
 
-    private fun navigateToNextActivity() {
+    private fun navigateToEnterPlayerNameActivity() {
         startActivity(Intent(this, EnterPlayerName::class.java))
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 
     private fun navigateToSettingsActivity() {
-        mSharedPreference.putValue(Constants.KEY_SAVED_PREVIOUS_ACTIVITY, Constants.Activity.ChoosePlayMode)
+        mSharedPreference.putValue(
+            Constants.KEY_SAVED_PREVIOUS_ACTIVITY,
+            Constants.Activity.ChoosePlayMode
+        )
         startActivity(Intent(this, Settings::class.java))
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
@@ -77,6 +85,7 @@ class ChoosePlayMode : AppCompatActivity() {
         }
 
         mIsBackBtnDoubleClicked = true
+
         mToast = AppUtils.showToast(
             this,
             getString(R.string.touch_to_exit),
@@ -115,5 +124,4 @@ class ChoosePlayMode : AppCompatActivity() {
         stopTimer()
         super.onDestroy()
     }
-
 }

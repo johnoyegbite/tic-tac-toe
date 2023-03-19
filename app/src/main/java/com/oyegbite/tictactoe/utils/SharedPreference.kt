@@ -30,7 +30,6 @@ class SharedPreference(context: Context) {
     fun <T> putValue(key: String, value: T): Int {
         when(value) {
             is String -> {
-//                Log.i(TAG, "putValue() => key: $key, value: '$value'")
                 editor.putString(key, value)
             }
             is Int -> {
@@ -58,6 +57,8 @@ class SharedPreference(context: Context) {
             }
         }
 
+        Log.i(TAG, "saved => key: $key, value: '$value'")
+
         editor.commit()
         return PUT_SUCCESS
     }
@@ -74,7 +75,6 @@ class SharedPreference(context: Context) {
         return when (keyClassType) {
             String::class.java -> {
                 val value = mSharedPreferences.getString(key, "") as? T
-//                Log.i(TAG, "getValue() => key: $key, value: '$value'")
                 value
             }
             Int::class.java -> mSharedPreferences.getInt(key, 0) as T
@@ -125,7 +125,7 @@ class SharedPreference(context: Context) {
                     }
                 } catch (e: Exception) {
                     Log.i(
-                        Constants.Developer.FULL_NAME,
+                        TAG,
                         "getValue: Exception occurred in POJO Xform " + e.message
                     )
                     null

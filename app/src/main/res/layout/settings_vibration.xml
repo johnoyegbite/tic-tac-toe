@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vibrationChecked"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@drawable/border_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_bigger"
+            android:layout_marginBottom="@dimen/margin_bigger"
+            android:layout_marginEnd="@dimen/margin_mid"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginLeft="@dimen/margin_bigger"
+                android:layout_marginRight="@dimen/margin_bigger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_vibration"
+                app:tint="@color/text" />
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_mid"
+                    android:gravity="center_vertical"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/vibration"/>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/vibration_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:fontFamily="sans-serif-condensed"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_alignParentEnd="true"
+                    android:checked="@{vibrationChecked}"
+                    android:theme="@style/SCBSwitch"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
