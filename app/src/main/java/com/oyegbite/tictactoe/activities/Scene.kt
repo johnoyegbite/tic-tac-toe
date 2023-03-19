@@ -36,6 +36,7 @@ class Scene : AppCompatActivity(), TicTacToeDataListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_scene)
+
         mSharedPreference = SharedPreference(this)
         mSharedPreference.putValue(Constants.KEY_SAVED_CURRENT_ACTIVITY, Constants.Activity.Scene)
 
